@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="download (1).jpeg" />
+  <!-- SEO -->
+  <meta charset="UTF-8">
+  <title>TIPDE — Create. Play. Code. Explore.</title>
+  <meta name="description" content="TIPDE is a futuristic AI + Gaming + Tools hub: AI tools catalog, website builder, compiler, games, streaming, chatbot, and dashboard.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Furqan Chattha">
+  <meta property="og:title" content="TIPDE — Create. Play. Code. Explore.">
+  <meta property="og:description" content="Everything AI + Everything Fun.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Exo+2:wght@500;700&family=Poppins:wght@400;600;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Styles -->
+  <style>
+    /* Brand identity & palette */
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: rgba(22, 22, 28, 0.6);
+      --bg-glass: rgba(16, 16, 24, 0.55);
+      --text: #ffffff;
+      --muted: #b7c0d1;
+      --purple: #8a2be2;
+      --blue: #00f0ff;
+      --magenta: #ff00ff;
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 12px 32px rgba(138, 43, 226, 0.25);
+      --glow: 0 0 14px rgba(138, 43, 226, 0.7), 0 0 22px rgba(0,240,255,0.4);
+      --radius: 16px;
+      --grid-gap: 18px;
+    }
+    .light {
+      --bg: #fafafa;
+      --bg-card: rgba(255, 255, 255, 0.9);
+      --bg-glass: rgba(255, 255, 255, 0.85);
+      --text: #0a0a0a;
+      --muted: #4a4a4a;
+      --border: rgba(0,0,0,0.12);
+      --shadow: 0 10px 22px rgba(138, 43, 226, 0.15);
+      --glow: 0 0 10px rgba(138, 43, 226, 0.45), 0 0 16px rgba(0,240,255,0.25);
+    }
+
+    /* Base */
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Inter, Roboto, Poppins, system-ui, sans-serif; }
+    a { color: var(--text); text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* Layout */
+    header, nav, main, footer { width: 100%; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--grid-gap); }
+    .cards-grid { display: grid; gap: var(--grid-gap); grid-template-columns: repeat(4, 1fr); }
+    .section { margin: 48px 0; }
+    .section h2 { font: 700 24px Orbitron, Poppins, sans-serif; letter-spacing: 0.6px; }
+
+    /* Navbar & drawer */
+    .navbar {
+      position: sticky; top: 0; z-index: 999;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(10,10,10,0.85), rgba(10,10,10,0.55));
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-name { font: 800 18px Orbitron, Poppins, sans-serif; letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .nav-links a, .nav-links button {
+      border: 1px solid transparent; background: transparent; color: var(--text);
+      padding: 8px 12px; border-radius: 12px; cursor: pointer; transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nav-links a:hover, .nav-links button:hover { transform: translateY(-2px); background: rgba(138,43,226,0.15); box-shadow: var(--glow); }
+    .theme-toggle { border: 1px solid var(--border); border-radius: 20px; padding: 6px 10px; display: inline-flex; gap: 8px; align-items: center; }
+    .hamburger { display: none; font-size: 20px; border: 1px solid var(--border); border-radius: 12px; padding: 8px; }
+    .drawer {
+      position: fixed; inset: 0 0 0 auto; width: 280px; height: 100vh; background: var(--bg-glass);
+      border-left: 1px solid var(--border); transform: translateX(100%); transition: transform 0.25s ease;
+      display: flex; flex-direction: column; padding: 16px; gap: 8px; z-index: 1000;
+    }
+    .drawer.open { transform: translateX(0%); }
+    .drawer a, .drawer button { text-align: left; padding: 10px 12px; border-radius: 12px; border: 1px solid transparent; background: transparent; color: var(--text); }
+    .drawer a:hover, .drawer button:hover { background: rgba(138,43,226,0.15); }
+
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 16px; border-radius: 14px; border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(138,43,226,0.45), rgba(0,240,255,0.35), rgba(255,0,255,0.25));
+      color: var(--text); box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; }
+    .btn:hover { transform: translateY(-2px) scale(1.01); box-shadow: var(--glow); }
+    .btn-outline { background: transparent; }
+    .badge { display: inline-block; font-size: 12px; padding: 4px 8px; border-radius: 12px; border: 1px solid var(--border); background: rgba(138,43,226,0.25); }
+
+    /* Cards */
+    .card {
+      border-radius: var(--radius); border: 1px solid var(--border);
+      background: var(--bg-card); box-shadow: var(--shadow); padding: 16px; position: relative; overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+    }
+    .card:hover { transform: translateY(-2px) scale(1.01); box-shadow: var(--glow); }
+    .card h3 { margin: 0 0 8px; font: 600 18px Poppins, sans-serif; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    /* Hero */
+    .hero {
+      position: relative; padding: 80px 20px; overflow: hidden;
+      background: radial-gradient(1000px 400px at 10% 0%, rgba(138,43,226,0.25), transparent),
+                  radial-gradient(800px 320px at 90% 10%, rgba(0,240,255,0.25), transparent);
+    }
+    .hero-title {
+      font: 800 clamp(36px, 8vw, 72px) Orbitron, Poppins, sans-serif;
+      text-shadow: 0 0 14px rgba(138,43,226,0.8);
+    }
+    .hero-sub { margin-top: 8px; color: var(--muted); font-size: clamp(14px, 2.2vw, 20px); }
+    .glitch {
+      position: relative; display: inline-block;
+    }
+    .glitch::before, .glitch::after {
+      content: attr(data-text); position: absolute; left: 0; top: 0;
+      text-shadow: -2px 0 #00f0ff; clip-path: inset(0 0 0 0);
+      animation: glitch 2s infinite;
+    }
+    .glitch::after { text-shadow: 2px 0 #ff00ff; animation-delay: 0.5s; }
+    @keyframes glitch {
+      0% { clip-path: inset(0 0 0 0); transform: translate(0); opacity: 0.85; }
+      20% { clip-path: inset(10% 0 40% 0); transform: translate(-1px, 1px); }
+      40% { clip-path: inset(40% 0 10% 0); transform: translate(2px, -2px); }
+      60% { clip-path: inset(20% 0 30% 0); transform: translate(-2px, 0px); }
+      80% { clip-path: inset(50% 0 20% 0); transform: translate(1px, 2px); }
+      100% { clip-path: inset(0 0 0 0); transform: translate(0); opacity: 1; }
+    }
+
+    /* Particles */
+    .particles { position: absolute; inset: 0; pointer-events: none; }
+    .particle { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #8a2be2; filter: blur(0.4px); animation: drift 12s linear infinite; opacity: 0.5; }
+    .particle.p2 { background: #00f0ff; }
+    .particle.p3 { background: #ff00ff; }
+    @keyframes drift {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(40px, -20px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    /* Animations */
+    .fade-in { animation: fadeIn 600ms ease both; }
+    .slide-up { animation: slideUp 600ms ease both; }
+    .scale-up { animation: scaleUp 500ms ease both; }
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: translateY(0) } }
+    @keyframes scaleUp { from { opacity:0; transform: scale(0.96) } to { opacity:1; transform: scale(1) } }
+
+    /* Inputs */
+    .input { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-glass); color: var(--text); outline: none; transition: box-shadow 0.2s, border-color 0.2s; }
+    .input:focus { border-color: var(--purple); box-shadow: var(--glow); }
+    .form-row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+
+    /* Editor & console */
+    .code-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: var(--grid-gap); }
+    .code-editor { min-height: 280px; border-radius: 12px; background: rgba(22, 22, 30, 0.9); border: 1px solid var(--border); padding: 10px; color: #e3e9ff; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow: auto; }
+    .console { min-height: 160px; border-radius: 12px; background: rgba(16, 16, 24, 0.9); border: 1px solid var(--border); padding: 10px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+    /* Chat */
+    .chat-wrap { display: grid; grid-template-columns: 380px 1fr; gap: var(--grid-gap); }
+    .chat-box, .preview-box { border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-glass); padding: 16px; }
+    .chat-messages { height: 420px; overflow: auto; display: flex; flex-direction: column; gap: 10px; }
+    .chat-bubble { max-width: 85%; padding: 10px 12px; border-radius: 14px; font-size: 14px; }
+    .chat-bubble.user { background: rgba(138, 43, 226, 0.3); align-self: flex-end; }
+    .chat-bubble.ai { background: rgba(0, 240, 255, 0.25); align-self: flex-start; }
+    .chat-meta { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+    /* Testimonials */
+    .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--grid-gap); }
+    .testimonial { border-radius: var(--radius); background: var(--bg-card); border: 1px solid var(--border); padding: 14px; }
+    .stars { color: #ffd54f; }
+
+    /* Footer & scroll-to-top */
+    footer { border-top: 1px solid var(--border); background: linear-gradient(180deg, rgba(10,10,10,0.55), rgba(10,10,10,0.85)); padding: 20px; margin-top: 48px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .social { display: flex; gap: 10px; }
+    .credit { font-size: 13px; color: var(--muted); }
+    .scroll-top { position: fixed; right: 16px; bottom: 20px; z-index: 998; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .chat-wrap, .code-wrap { grid-template-columns: 1fr; }
+      .testimonials { grid-template-columns: 1fr 1fr; }
+      .hamburger { display: inline-block; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 640px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .testimonials { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" aria-label="Main Navigation">
+    <div class="nav-inner container">
+      <div class="brand">
+        <span class="brand-name" aria-label="TIPDE">TIPDE</span>
+        <span class="badge">Everything AI + Everything Fun.</span>
+      </div>
+      <div class="nav-links" role="navigation">
+        <a href="#/home">Home</a>
+        <a href="#/aitools">AI Tools</a>
+        <a href="#/games">Games</a>
+        <a href="#/streaming">Streaming</a>
+        <a href="#/compiler">Code Compiler</a>
+        <a href="#/builder">Website Builder</a>
+        <a href="#/chatbot">Chatbot</a>
+        <a href="#/dashboard">Dashboard</a>
+        <a href="#/profile">Profile</a>
+        <button id="logoutBtn" class="btn btn-outline" aria-label="Logout" style="display:none"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+        <button id="themeBtn" class="theme-toggle" aria-label="Toggle theme"><i class="fa-regular fa-moon"></i><span>Dark</span></button>
+      </div>
+      <button id="hamburger" class="hamburger" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <aside id="drawer" class="drawer" aria-label="Mobile Menu" aria-hidden="true">
+    <button id="drawerClose" class="btn btn-outline"><i class="fa-solid fa-xmark"></i> Close</button>
+    <a href="#/home">Home</a>
+    <a href="#/aitools">AI Tools</a>
+    <a href="#/games">Games</a>
+    <a href="#/streaming">Streaming</a>
+    <a href="#/compiler">Code Compiler</a>
+    <a href="#/builder">Website Builder</a>
+    <a href="#/chatbot">Chatbot</a>
+    <a href="#/dashboard">Dashboard</a>
+    <a href="#/profile">Profile</a>
+    <button id="drawerLogout" class="btn btn-outline" style="display:none"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    <button id="drawerTheme" class="btn btn-outline"><i class="fa-regular fa-moon"></i> Theme</button>
+  </aside>
+
+  <!-- Main content (SPA outlet) -->
+  <main id="app" class="container" role="main" aria-live="polite"></main>
+
+  <!-- Footer -->
+  <footer aria-label="Footer">
+    <div class="footer-inner container">
+      <div class="credit">Made by Furqan Chattha © Tipde 2025</div>
+      <div class="social" aria-label="Social links">
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+    <button class="btn scroll-top" id="scrollTop"><i class="fa-solid fa-arrow-up"></i></button>
+  </footer>
+
+  <!-- Pyodide for Python -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js" defer></script>
+
+  <!-- App Scripts -->
+  <script>
+    /* TIPDE SPA
+       - Hash routing (#/home, #/login, #/dashboard, etc.)
+       - Theme toggle saved in localStorage
+       - Local demo auth (email/pass) with route guards (replace with Firebase later)
+       - Pages dynamically rendered into <main id="app">
+       - Lists: Games (50+), AI Tools (50+), Streaming (global + regional)
+       - Compiler with HTML/CSS/JS live preview + Python via Pyodide
+       - Website Builder with live iframe preview + export
+    */
+
+    // ---------- Utilities ----------
+    const $ = (sel, parent = document) => parent.querySelector(sel);
+    const $$ = (sel, parent = document) => [...parent.querySelectorAll(sel)];
+    const state = {
+      theme: localStorage.getItem('tipde_theme') || 'dark',
+      user: JSON.parse(localStorage.getItem('tipde_user') || 'null'),
+      favorites: JSON.parse(localStorage.getItem('tipde_favorites') || '{"tools":[],"games":[]}'),
+    };
+    function setTheme(t) {
+      state.theme = t;
+      document.documentElement.classList.toggle('light', t === 'light');
+      $('#themeBtn i').className = t === 'light' ? 'fa-regular fa-sun' : 'fa-regular fa-moon';
+      $('#themeBtn span').textContent = t === 'light' ? 'Light' : 'Dark';
+      localStorage.setItem('tipde_theme', t);
+    }
+    function toast(msg) {
+      const t = document.createElement('div');
+      t.className = 'slide-up';
+      Object.assign(t.style, {
+        position:'fixed', bottom:'16px', right:'16px', background:'rgba(24,24,32,0.95)',
+        border:'1px solid var(--border)', padding:'10px 14px', borderRadius:'12px', zIndex:9999
+      });
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 2600);
+    }
+    function guard(authRequired = true) {
+      if (authRequired && !state.user) {
+        toast('Login required'); location.hash = '#/login'; return false;
+      }
+      return true;
+    }
+    function starRating(n=5) { return '★'.repeat(Math.round(n)).padEnd(5, '☆'); }
+
+    // ---------- Theme & Navbar ----------
+    document.addEventListener('DOMContentLoaded', () => {
+      setTheme(state.theme);
+      $('#themeBtn').addEventListener('click', () => setTheme(state.theme === 'dark' ? 'light' : 'dark'));
+      $('#scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      const drawer = $('#drawer');
+      $('#hamburger').addEventListener('click', () => { drawer.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); });
+      $('#drawerClose').addEventListener('click', () => { drawer.classList.remove('open'); drawer.setAttribute('aria-hidden', 'true'); });
+      $('#drawerTheme').addEventListener('click', () => setTheme(state.theme === 'dark' ? 'light' : 'dark'));
+      updateAuthUI();
+    });
+    function updateAuthUI() {
+      const show = !!state.user;
+      $('#logoutBtn').style.display = show ? '' : 'none';
+      $('#drawerLogout').style.display = show ? '' : 'none';
+      $('#logoutBtn').onclick = () => { state.user = null; localStorage.removeItem('tipde_user'); toast('Logged out'); location.hash = '#/home'; updateAuthUI(); };
+      $('#drawerLogout').onclick = () => { state.user = null; localStorage.removeItem('tipde_user'); toast('Logged out'); location.hash = '#/home'; updateAuthUI(); };
+    }
+
+    // ---------- Data (50+ items each where applicable) ----------
+    const GAMES = [
+      { id:'g1',  name:'The Legend of Zelda: Breath of the Wild', cats:['Adventure','Console'], rating:4.9, desc:'Open-world Hyrule with physics-driven puzzles.', link:'https://www.nintendo.com' },
+      { id:'g2',  name:'Elden Ring', cats:['RPG','PC'], rating:4.8, desc:'Dark fantasy RPG in the Lands Between.', link:'https://store.steampowered.com' },
+      { id:'g3',  name:'Minecraft', cats:['Sandbox','PC','Mobile'], rating:4.7, desc:'Creative survival & building sandbox.', link:'https://www.minecraft.net' },
+      { id:'g4',  name:'Fortnite', cats:['Shooter','Online','PC'], rating:4.5, desc:'Battle royale with building and events.', link:'https://www.epicgames.com' },
+      { id:'g5',  name:'Valorant', cats:['Shooter','PC'], rating:4.6, desc:'5v5 tactical hero shooter by Riot.', link:'https://playvalorant.com' },
+      { id:'g6',  name:'Genshin Impact', cats:['RPG','PC','Mobile'], rating:4.4, desc:'Open-world action RPG, free-to-play.', link:'https://genshin.hoyoverse.com' },
+      { id:'g7',  name:'League of Legends', cats:['MOBA','PC','Multiplayer'], rating:4.4, desc:'Competitive MOBA with deep meta.', link:'https://leagueoflegends.com' },
+      { id:'g8',  name:'Apex Legends', cats:['Shooter','PC','Multiplayer'], rating:4.3, desc:'Fast-paced hero battle royale.', link:'https://www.ea.com/games/apex-legends' },
+      { id:'g9',  name:'Counter-Strike 2', cats:['Shooter','PC','Multiplayer'], rating:4.6, desc:'Source 2 tactical FPS evolution.', link:'https://store.steampowered.com' },
+      { id:'g10', name:'Hades', cats:['Indie','PC'], rating:4.7, desc:'Roguelike with stylish combat.', link:'https://store.epicgames.com' },
+      { id:'g11', name:'Stardew Valley', cats:['Sim','PC','Mobile'], rating:4.8, desc:'Cozy farming sim with relationships.', link:'https://www.stardewvalley.net' },
+      { id:'g12', name:'God of War', cats:['Action','Console'], rating:4.9, desc:'Cinematic saga of Kratos & Atreus.', link:'https://www.playstation.com' },
+      { id:'g13', name:'Red Dead Redemption 2', cats:['Adventure','PC','Console'], rating:4.8, desc:'Epic Western in a living world.', link:'https://www.rockstargames.com' },
+      { id:'g14', name:'Cyberpunk 2077', cats:['RPG','PC','Console'], rating:4.2, desc:'Futuristic RPG in Night City.', link:'https://www.cyberpunk.net' },
+      { id:'g15', name:'Super Mario Odyssey', cats:['Platformer','Console'], rating:4.9, desc:'Joyful platforming across worlds.', link:'https://www.nintendo.com' },
+      { id:'g16', name:'Hollow Knight', cats:['Indie','PC'], rating:4.8, desc:'Hand-drawn metroidvania classic.', link:'https://store.steampowered.com' },
+      { id:'g17', name:'Celeste', cats:['Indie','Platformer'], rating:4.7, desc:'Precise platformer about perseverance.', link:'https://store.steampowered.com' },
+      { id:'g18', name:'Rocket League', cats:['Sports','PC','Multiplayer'], rating:4.6, desc:'Cars + soccer = skillful fun.', link:'https://www.rocketleague.com' },
+      { id:'g19', name:'Overwatch 2', cats:['Shooter','PC','Multiplayer'], rating:4.0, desc:'Team-based hero shooter.', link:'https://playoverwatch.com' },
+      { id:'g20', name:'Among Us', cats:['Party','PC','Mobile'], rating:4.1, desc:'Social deduction party game.', link:'https://innersloth.com' },
+      { id:'g21', name:'Dota 2', cats:['MOBA','PC','Multiplayer'], rating:4.2, desc:'Complex MOBA with esports scene.', link:'https://www.dota2.com' },
+      { id:'g22', name:'Path of Exile', cats:['RPG','PC'], rating:4.3, desc:'ARPG with deep builds.', link:'https://www.pathofexile.com' },
+      { id:'g23', name:'Diablo IV', cats:['RPG','PC','Console'], rating:4.0, desc:'Dark ARPG with shared world.', link:'https://diablo4.blizzard.com' },
+      { id:'g24', name:'Animal Crossing: New Horizons', cats:['Sim','Console'], rating:4.6, desc:'Cozy island life sim.', link:'https://www.nintendo.com' },
+      { id:'g25', name:'Monster Hunter: World', cats:['Action','PC'], rating:4.5, desc:'Hunt massive creatures together.', link:'https://store.steampowered.com' },
+      { id:'g26', name:'Sekiro: Shadows Die Twice', cats:['Action','PC'], rating:4.7, desc:'Precise combat & stealth.', link:'https://store.steampowered.com' },
+      { id:'g27', name:'Terraria', cats:['Indie','PC'], rating:4.6, desc:'2D sandbox adventure.', link:'https://store.steampowered.com' },
+      { id:'g28', name:'Dead Cells', cats:['Indie','PC'], rating:4.5, desc:'Fast roguelite with smooth combat.', link:'https://store.steampowered.com' },
+      { id:'g29', name:'Ori and the Will of the Wisps', cats:['Platformer','PC'], rating:4.8, desc:'Beautiful platformer & story.', link:'https://store.steampowered.com' },
+      { id:'g30', name:'Fall Guys', cats:['Party','PC'], rating:4.0, desc:'Chaotic obstacle course fun.', link:'https://store.epicgames.com' },
+      { id:'g31', name:'Forza Horizon 5', cats:['Racing','PC'], rating:4.6, desc:'Open-world racing in Mexico.', link:'https://forza.net' },
+      { id:'g32', name:'Gran Turismo 7', cats:['Racing','Console'], rating:4.4, desc:'Polished racing sim.', link:'https://www.playstation.com' },
+      { id:'g33', name:'Destiny 2', cats:['Shooter','PC','Console'], rating:4.1, desc:'Shared world shooter with raids.', link:'https://www.bungie.net' },
+      { id:'g34', name:'Rainbow Six Siege', cats:['Shooter','PC'], rating:4.3, desc:'Tactical shooter with destruction.', link:'https://store.steampowered.com' },
+      { id:'g35', name:'PUBG: Battlegrounds', cats:['Shooter','PC'], rating:4.0, desc:'Battle royale gunplay.', link:'https://pubg.com' },
+      { id:'g36', name:'Warframe', cats:['Online','PC'], rating:4.2, desc:'Space ninja looter-shooter.', link:'https://www.warframe.com' },
+      { id:'g37', name:'No Man\'s Sky', cats:['Adventure','PC'], rating:4.3, desc:'Procedural universe exploration.', link:'https://www.nomanssky.com' },
+      { id:'g38', name:'Subnautica', cats:['Adventure','PC'], rating:4.6, desc:'Underwater survival adventure.', link:'https://store.steampowered.com' },
+      { id:'g39', name:'The Witcher 3', cats:['RPG','PC'], rating:4.9, desc:'Masterpiece RPG & narratives.', link:'https://thewitcher.com' },
+      { id:'g40', name:'Dark Souls III', cats:['RPG','PC'], rating:4.7, desc:'Punishing yet fair RPG.', link:'https://store.steampowered.com' },
+      { id:'g41', name:'Cuphead', cats:['Indie','PC'], rating:4.6, desc:'Run-and-gun boss rush.', link:'https://store.steampowered.com' },
+      { id:'g42', name:'Satisfactory', cats:['Sim','PC'], rating:4.5, desc:'3D factory builder.', link:'https://store.epicgames.com' },
+      { id:'g43', name:'Factorio', cats:['Sim','PC'], rating:4.9, desc:'Top-down automation classic.', link:'https://store.steampowered.com' },
+      { id:'g44', name:'Horizon Zero Dawn', cats:['Adventure','PC'], rating:4.5, desc:'Robotic creatures & wilds.', link:'https://store.steampowered.com' },
+      { id:'g45', name:'Death Stranding', cats:['Adventure','PC'], rating:4.2, desc:'Cinematic strand experience.', link:'https://store.steampowered.com' },
+      { id:'g46', name:'Nier: Automata', cats:['RPG','PC'], rating:4.7, desc:'Stylish action RPG.', link:'https://store.steampowered.com' },
+      { id:'g47', name:'Resident Evil 4 Remake', cats:['Horror','PC'], rating:4.6, desc:'Modern survival horror.', link:'https://store.steampowered.com' },
+      { id:'g48', name:'Halo Infinite', cats:['Shooter','PC'], rating:4.0, desc:'Master Chief\'s open zones.', link:'https://www.halowaypoint.com' },
+      { id:'g49', name:'Splatoon 3', cats:['Shooter','Console'], rating:4.4, desc:'Colorful ink splat action.', link:'https://www.nintendo.com' },
+      { id:'g50', name:'Metroid Dread', cats:['Platformer','Console'], rating:4.7, desc:'Fast, tense metroidvania.', link:'https://www.nintendo.com' },
+      { id:'g51', name:'Baldur\'s Gate 3', cats:['RPG','PC'], rating:4.9, desc:'Rich CRPG & branching paths.', link:'https://store.steampowered.com' },
+      { id:'g52', name:'Sea of Stars', cats:['Indie','RPG'], rating:4.6, desc:'Retro-inspired JRPG charm.', link:'https://store.steampowered.com' }
+    ];
+
+    const AI_TOOLS = [
+      { id:'t1', name:'ChatGPT', cats:['Chatbot','Text'], rating:4.8, desc:'General AI assistant.', link:'https://chat.openai.com', price:'Free' },
+      { id:'t2', name:'Midjourney', cats:['Design AI','Image'], rating:4.7, desc:'AI image generation.', link:'https://www.midjourney.com', price:'Paid' },
+      { id:'t3', name:'Stable Diffusion', cats:['Design AI','Image'], rating:4.6, desc:'Open-source image gen.', link:'https://stability.ai', price:'Free' },
+      { id:'t4', name:'Claude', cats:['Chatbot','Text'], rating:4.6, desc:'Helpful AI assistant.', link:'https://claude.ai', price:'Free' },
+      { id:'t5', name:'GitHub Copilot', cats:['Code Generators'], rating:4.5, desc:'AI pair programmer.', link:'https://github.com/features/copilot', price:'Paid' },
+      { id:'t6', name:'Cursor', cats:['AI Website Builders','Code Generators'], rating:4.4, desc:'AI coding editor.', link:'https://cursor.dev', price:'Free' },
+      { id:'t7', name:'Figma AI', cats:['Design AI'], rating:4.2, desc:'Design assistance.', link:'https://figma.com', price:'Paid' },
+      { id:'t8', name:'Runway', cats:['Design AI','Video'], rating:4.4, desc:'AI video generation.', link:'https://runwayml.com', price:'Paid' },
+      { id:'t9', name:'CapCut', cats:['Editors','Video'], rating:4.3, desc:'Video editor with AI.', link:'https://www.capcut.com', price:'Free' },
+      { id:'t10', name:'Canva', cats:['Editors','Design AI'], rating:4.4, desc:'Design tool with AI.', link:'https://www.canva.com', price:'Free' },
+      { id:'t11', name:'Notion AI', cats:['Chatbot','Productivity'], rating:4.3, desc:'Writing assistant.', link:'https://www.notion.so', price:'Paid' },
+      { id:'t12', name:'Perplexity', cats:['Chatbot','Search'], rating:4.5, desc:'Answer engine.', link:'https://www.perplexity.ai', price:'Free' },
+      { id:'t13', name:'Replit AI', cats:['AI Website Builders','Code Generators'], rating:4.2, desc:'Online coding w/ AI.', link:'https://replit.com', price:'Free' },
+      { id:'t14', name:'Google Gemini', cats:['Chatbot','Design AI'], rating:4.3, desc:'Multimodal assistant.', link:'https://gemini.google.com', price:'Free' },
+      { id:'t15', name:'Microsoft Designer', cats:['Design AI'], rating:4.1, desc:'AI design tool.', link:'https://designer.microsoft.com', price:'Free' },
+      { id:'t16', name:'Leonardo AI', cats:['Design AI','Game Assets'], rating:4.2, desc:'Art & assets gen.', link:'https://leonardo.ai', price:'Paid' },
+      { id:'t17', name:'Hugging Face Spaces', cats:['Deploy'], rating:4.4, desc:'Host & share ML apps.', link:'https://huggingface.co/spaces', price:'Free' },
+      { id:'t18', name:'Replicate', cats:['Deploy'], rating:4.1, desc:'Run models in cloud.', link:'https://replicate.com', price:'Paid' },
+      { id:'t19', name:'OpenRouter', cats:['APIs'], rating:4.1, desc:'Unified model access.', link:'https://openrouter.ai', price:'Free' },
+      { id:'t20', name:'Zapier AI', cats:['Productivity'], rating:3.9, desc:'Automation with AI.', link:'https://zapier.com', price:'Paid' },
+      { id:'t21', name:'InferKit', cats:['Text'], rating:3.7, desc:'Text gen API.', link:'https://inferkit.com', price:'Paid' },
+      { id:'t22', name:'Jasper', cats:['Text'], rating:4.1, desc:'Marketing copy AI.', link:'https://www.jasper.ai', price:'Paid' },
+      { id:'t23', name:'Copy.ai', cats:['Text'], rating:4.0, desc:'Writing assistant.', link:'https://www.copy.ai', price:'Free' },
+      { id:'t24', name:'QuillBot', cats:['Text'], rating:4.2, desc:'Paraphrase & grammar.', link:'https://quillbot.com', price:'Free' },
+      { id:'t25', name:'Suno', cats:['Audio'], rating:4.3, desc:'AI music creation.', link:'https://www.suno.ai', price:'Free' },
+      { id:'t26', name:'ElevenLabs', cats:['Audio'], rating:4.4, desc:'Voice generation.', link:'https://elevenlabs.io', price:'Paid' },
+      { id:'t27', name:'Krea AI', cats:['Design AI'], rating:4.1, desc:'Realtime image gen.', link:'https://www.krea.ai', price:'Paid' },
+      { id:'t28', name:'Playground AI', cats:['Design AI'], rating:4.2, desc:'Image gen & edits.', link:'https://playgroundai.com', price:'Free' },
+      { id:'t29', name:'Pika', cats:['Video'], rating:4.1, desc:'AI video maker.', link:'https://pika.art', price:'Free' },
+      { id:'t30', name:'Tableau AI', cats:['Data'], rating:4.0, desc:'Analytics insights.', link:'https://www.tableau.com', price:'Paid' },
+      { id:'t31', name:'Power BI Copilot', cats:['Data'], rating:4.0, desc:'BI assistant.', link:'https://powerbi.microsoft.com', price:'Paid' },
+      { id:'t32', name:'AWS CodeWhisperer', cats:['Code Generators'], rating:3.9, desc:'Coding suggestions.', link:'https://aws.amazon.com/codewhisperer', price:'Free' },
+      { id:'t33', name:'AgentGPT', cats:['Chatbot','Agents'], rating:3.9, desc:'Agentic executor.', link:'https://agentgpt.io', price:'Free' },
+      { id:'t34', name:'AutoGPT', cats:['Agents'], rating:3.9, desc:'Autonomous tasks.', link:'https://github.com/Significant-Gravitas/Auto-GPT', price:'Free' },
+      { id:'t35', name:'PromptPerfect', cats:['Text'], rating:4.0, desc:'Optimize prompts.', link:'https://promptperfect.jina.ai', price:'Paid' },
+      { id:'t36', name:'Rive', cats:['Design'], rating:4.1, desc:'Interactive motion.', link:'https://rive.app', price:'Free' },
+      { id:'t37', name:'Remini', cats:['Image'], rating:4.0, desc:'Photo enhancement.', link:'https://www.remini.ai', price:'Paid' },
+      { id:'t38', name:'Photoroom', cats:['Image'], rating:4.1, desc:'Background removal.', link:'https://www.photoroom.com', price:'Free' },
+      { id:'t39', name:'Kaiber', cats:['Video'], rating:4.0, desc:'Video from images.', link:'https://www.kaiber.ai', price:'Paid' },
+      { id:'t40', name:'Mubert', cats:['Audio'], rating:4.0, desc:'AI-generated music.', link:'https://mubert.com', price:'Paid' },
+      { id:'t41', name:'Figma Community AI', cats:['Design'], rating:4.0, desc:'Plugins + AI.', link:'https://figma.com/community', price:'Free' },
+      { id:'t42', name:'HuggingChat', cats:['Chatbot'], rating:4.0, desc:'Open-source chat.', link:'https://huggingface.co/chat', price:'Free' },
+      { id:'t43', name:'Gradio', cats:['Deploy'], rating:4.2, desc:'UI for ML demos.', link:'https://gradio.app', price:'Free' },
+      { id:'t44', name:'Colab', cats:['Deploy','Data'], rating:4.2, desc:'Notebooks in cloud.', link:'https://colab.research.google.com', price:'Free' },
+      { id:'t45', name:'Vercel AI SDK', cats:['APIs'], rating:4.0, desc:'Build AI apps.', link:'https://sdk.vercel.ai', price:'Free' },
+      { id:'t46', name:'Supabase', cats:['Deploy','Data'], rating:4.0, desc:'Open-source backend.', link:'https://supabase.com', price:'Free' },
+      { id:'t47', name:'Pinecone', cats:['APIs','Data'], rating:4.0, desc:'Vector DB.', link:'https://www.pinecone.io', price:'Paid' },
+      { id:'t48', name:'Weaviate', cats:['APIs','Data'], rating:4.0, desc:'Open vector DB.', link:'https://weaviate.io', price:'Free' },
+      { id:'t49', name:'LangChain', cats:['APIs'], rating:4.1, desc:'Framework for LLM apps.', link:'https://langchain.com', price:'Free' },
+      { id:'t50', name:'Ollama', cats:['Deploy'], rating:4.2, desc:'Run models locally.', link:'https://ollama.ai', price:'Free' },
+      { id:'t51', name:'DALL·E', cats:['Design AI'], rating:4.2, desc:'Image generation.', link:'https://openai.com/dall-e-2', price:'Paid' }
+    ];
+
+    const STREAMING = [
+      { id:'s1', name:'YouTube', cats:['Global'], rating:4.6, desc:'Free videos for everything.', link:'https://youtube.com' },
+      { id:'s2', name:'Netflix', cats:['Global'], rating:4.5, desc:'Movies & series.', link:'https://netflix.com' },
+      { id:'s3', name:'Prime Video', cats:['Global'], rating:4.2, desc:'Amazon originals.', link:'https://primevideo.com' },
+      { id:'s4', name:'Disney+', cats:['Global'], rating:4.3, desc:'Disney, Marvel, Star Wars.', link:'https://disneyplus.com' },
+      { id:'s5', name:'Vimeo', cats:['Global'], rating:4.1, desc:'Creative video platform.', link:'https://vimeo.com' },
+      { id:'s6', name:'Crunchyroll', cats:['Global'], rating:4.4, desc:'Anime streaming.', link:'https://crunchyroll.com' },
+      { id:'s7', name:'Spotify', cats:['Global'], rating:4.5, desc:'Music & podcasts.', link:'https://spotify.com' },
+      { id:'s8', name:'ARY ZAP', cats:['Pakistan'], rating:4.0, desc:'Pakistani streaming.', link:'https://aryzap.com' },
+      { id:'s9', name:'Tamasha', cats:['Pakistan'], rating:4.0, desc:'Local live TV & shows.', link:'https://tamasha.tv' },
+      { id:'s10', name:'JioCinema', cats:['India'], rating:4.1, desc:'Indian streaming.', link:'https://jiocinema.com' },
+      { id:'s11', name:'Hotstar', cats:['India'], rating:4.2, desc:'Cricket & shows.', link:'https://hotstar.com' },
+      { id:'s12', name:'Apple TV+', cats:['Global'], rating:4.1, desc:'High-quality originals.', link:'https://tv.apple.com' }
+    ];
+
+    const EDITORS = [
+      { id:'e1', name:'Canva', cats:['Editors'], rating:4.4, desc:'Online design studio.', link:'https://canva.com' },
+      { id:'e2', name:'CapCut', cats:['Editors'], rating:4.3, desc:'Video editing suite.', link:'https://capcut.com' },
+      { id:'e3', name:'Photopea', cats:['Editors'], rating:4.2, desc:'Photoshop in browser.', link:'https://photopea.com' },
+      { id:'e4', name:'Pixlr', cats:['Editors'], rating:4.0, desc:'Image editor online.', link:'https://pixlr.com' },
+      { id:'e5', name:'Remove.bg', cats:['Editors'], rating:4.2, desc:'Background remover.', link:'https://remove.bg' }
+    ];
+
+    // ---------- Router ----------
+    const routes = {
+      '/home': renderHome,
+      '/login': renderLogin,
+      '/dashboard': renderDashboard,
+      '/aitools': renderTools,
+      '/games': renderGames,
+      '/streaming': renderStreaming,
+      '/compiler': renderCompiler,
+      '/builder': renderBuilder,
+      '/chatbot': renderChatbot,
+      '/profile': renderProfile
+    };
+    function navigate() {
+      const hash = location.hash.replace('#', '') || '/home';
+      const outlet = $('#app');
+      const fn = routes[hash] || renderHome;
+      outlet.className = 'container fade-in';
+      fn(outlet);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.addEventListener('hashchange', navigate);
+    window.addEventListener('load', navigate);
+
+    // ---------- Pages ----------
+    function renderHome(root) {
+      root.innerHTML = `
+        <section class="hero fade-in" aria-label="Hero">
+          <div class="particles">
+            <div class="particle" style="left:12%; top:20%"></div>
+            <div class="particle p2" style="left:38%; top:64%"></div>
+            <div class="particle p3" style="left:80%; top:14%"></div>
+            <div class="particle p2" style="left:72%; top:40%"></div>
+          </div>
+          <h1 class="hero-title glitch" data-text="TIPDE — Tools, AI, Games, Everything">TIPDE — Tools, AI, Games, Everything</h1>
+          <p id="typewriter" class="hero-sub">AI Tools… Games… Streaming… Code Compiler…</p>
+          <div class="section">
+            <button class="btn" onclick="location.hash='${state.user ? '#/dashboard' : '#/login'}'"><i class="fa-solid fa-rocket"></i> Start Now (Login Required)</button>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Explore categories</h2>
+          <div class="grid">
+            <div class="card slide-up" style="grid-column: span 4"><h3>AI Tools 🧠</h3><p>Discover 50+ curated AI apps by category.</p></div>
+            <div class="card slide-up" style="grid-column: span 4"><h3>Games 🎮</h3><p>Top-rated games with filters and sorting.</p></div>
+            <div class="card slide-up" style="grid-column: span 4"><h3>Streaming Apps 📺</h3><p>Find platforms by region and interest.</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Recommended</h2>
+          <div class="cards-grid">
+            <div class="card scale-up"><h3><i class="fa-solid fa-sitemap"></i> AI Website Builder</h3><p>Live preview as you type, exportable code.</p></div>
+            <div class="card scale-up"><h3><i class="fa-solid fa-code"></i> Code Compiler</h3><p>Run HTML/CSS/JS & Python via Pyodide.</p></div>
+            <div class="card scale-up"><h3><i class="fa-solid fa-comments"></i> Chatbot</h3><p>Creative, Coder, and Tutor modes.</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>What users say</h2>
+          <div class="testimonials">
+            <article class="testimonial slide-up">
+              <h3 style="margin:0 0 8px">Aisha</h3><div class="stars">★★★★★</div>
+              <p>“TIPDE feels like the future — I launched a neon portfolio in an afternoon.”</p>
+            </article>
+            <article class="testimonial slide-up">
+              <h3 style="margin:0 0 8px">Bilal</h3><div class="stars">★★★★★</div>
+              <p>“The compiler and tools make learning fast, fun, and seriously slick.”</p>
+            </article>
+            <article class="testimonial slide-up">
+              <h3 style="margin:0 0 8px">Zara</h3><div class="stars">★★★★☆</div>
+              <p>“Dark neon vibes are chef’s kiss. The games hub is surprisingly helpful.”</p>
+            </article>
+          </div>
+        </section>
+
+        <div class="credit">Made by Furqan Chattha © Tipde 2025</div>
+      `;
+      typewriter($('#typewriter'), ['AI Tools…', 'Games…', 'Streaming…', 'Code Compiler…', 'Website Builder…', 'Chatbot…'], 60, 1200);
+    }
+
+    function renderLogin(root) {
+      root.innerHTML = `
+        <section class="section fade-in" aria-label="Login">
+          <h2>Login</h2>
+          <div class="card">
+            <input id="loginEmail" class="input" type="email" placeholder="Email" aria-label="Email">
+            <div id="loginEmailErr" style="color:#ff6b6b; font-size:12px; display:none">Invalid email format</div>
+            <input id="loginPass" class="input" type="password" placeholder="Password" aria-label="Password">
+            <div id="loginPassErr" style="color:#ff6b6b; font-size:12px; display:none">Password must be at least 8 characters</div>
+            <div class="section">
+              <button id="loginBtn" class="btn"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+              <button id="googleBtn" class="btn btn-outline"><i class="fa-brands fa-google"></i> Google</button>
+            </div>
+            <p class="muted">Don’t have an account? <a href="#/signup" id="goSignupLink">Sign Up</a></p>
+          </div>
+        </section>
+
+        <section class="section fade-in" aria-label="Signup">
+          <h2>Sign Up</h2>
+          <div class="card">
+            <div class="form-row">
+              <input id="signupEmail" class="input" type="email" placeholder="Email" aria-label="Email">
+              <input id="signupPass" class="input" type="password" placeholder="Password" aria-label="Password">
+            </div>
+            <input id="signupPass2" class="input" type="password" placeholder="Confirm Password" aria-label="Confirm Password">
+            <label style="display:flex; align-items:center; gap:8px; margin-top:8px">
+              <input id="signupTerms" type="checkbox" aria-label="Accept Terms"> I agree to the Terms and Privacy
+            </label>
+            <div id="signupErr" style="color:#ff6b6b; font-size:12px; display:none; margin-top:8px"></div>
+            <div class="section">
+              <button id="signupBtn" class="btn"><i class="fa-solid fa-user-plus"></i> Create Account</button>
+            </div>
+          </div>
+        </section>
+
+        <div class="credit">Made by Furqan Chattha © Tipde 2025</div>
+      `;
+      $('#googleBtn').onclick = () => toast('Google OAuth will be wired via Firebase.');
+      $('#loginBtn').onclick = () => {
+        const email = $('#loginEmail').value.trim();
+        const pass = $('#loginPass').value.trim();
+        const emailOk = /\S+@\S+\.\S+/.test(email);
+        const passOk = pass.length >= 8;
+        $('#loginEmailErr').style.display = emailOk ? 'none' : 'block';
+        $('#loginPassErr').style.display = passOk ? 'none' : 'block';
+        if (!emailOk || !passOk) return;
+        state.user = { uid:'local', email, name: email.split('@')[0] };
+        localStorage.setItem('tipde_user', JSON.stringify(state.user));
+        toast(`Welcome, ${state.user.name}!`);
+        updateAuthUI();
+        location.hash = '#/dashboard';
+      };
+      $('#signupBtn').onclick = () => {
+        const email = $('#signupEmail').value.trim();
+        const p1 = $('#signupPass').value.trim();
+        const p2 = $('#signupPass2').value.trim();
+        const terms = $('#signupTerms').checked;
+        let err = '';
+        if (!/\S+@\S+\.\S+/.test(email)) err = 'Please enter a valid email.';
+        else if (p1.length < 8) err = 'Password must be at least 8 characters.';
+        else if (p1 !== p2) err = 'Passwords do not match.';
+        else if (!terms) err = 'You must accept Terms and Privacy.';
+        $('#signupErr').textContent = err; $('#signupErr').style.display = err ? 'block' : 'none';
+        if (err) return;
+        state.user = { uid:'local', email, name: email.split('@')[0] };
+        localStorage.setItem('tipde_user', JSON.stringify(state.user));
+        toast('Account created.');
+        updateAuthUI();
+        location.hash = '#/dashboard';
+      };
+      $('#goSignupLink').onclick = (e) => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); };
+    }
+
+    function renderDashboard(root) {
+      if (!guard(true)) return;
+      const favTools = state.favorites.tools.map(id => AI_TOOLS.find(t => t.id === id)).filter(Boolean);
+      const favGames = state.favorites.games.map(id => GAMES.find(g => g.id === id)).filter(Boolean);
+      root.innerHTML = `
+        <section class="section fade-in" aria-label="Dashboard">
+          <h2>Hi ${state.user?.name || 'there'}, ready to create?</h2>
+          <div class="cards-grid">
+            <a href="#/builder" class="card"><h3>AI Website Builder</h3><p>Generate and export sites.</p></a>
+            <a href="#/compiler" class="card"><h3>Code Compiler</h3><p>Run HTML/CSS/JS & Python.</p></a>
+            <a href="#/games" class="card"><h3>Games Directory</h3><p>Top-rated picks & filters.</p></a>
+            <a href="#/streaming" class="card"><h3>Streaming Platforms</h3><p>Find & favorite apps.</p></a>
+            <a href="#/chatbot" class="card"><h3>Chatbot</h3><p>Creative, coder, tutor modes.</p></a>
+            <a href="#/aitools" class="card"><h3>AI Tools Catalog</h3><p>50+ curated tools.</p></a>
+          </div>
+
+          <section class="section">
+            <h2>Recently viewed</h2>
+            <p class="muted">Coming soon.</p>
+          </section>
+
+          <section class="section">
+            <h2>Favorites — AI Tools</h2>
+            <div class="cards-grid">
+              ${favTools.length ? favTools.map(t => `
+                <div class="card"><h3>${t.name}</h3><p>${t.desc}</p></div>
+              `).join('') : '<p class="muted">No favorites yet.</p>'}
+            </div>
+          </section>
+
+          <section class="section">
+            <h2>Favorites — Games</h2>
+            <div class="cards-grid">
+              ${favGames.length ? favGames.map(g => `
+                <div class="card"><h3>${g.name}</h3><p>${g.desc}</p></div>
+              `).join('') : '<p class="muted">No favorites yet.</p>'}
+            </div>
+          </section>
+
+          <section class="section">
+            <h2>Profile</h2>
+            <div class="card"><p><strong>Avatar:</strong> 👤</p><p><strong>Username:</strong> ${state.user?.name}</p><p class="muted">Edit profile coming soon.</p></div>
+          </section>
+        </section>
+
+        <div class="credit">Made by Furqan Chattha © Tipde 2025</div>
+      `;
+    }
+
+    function renderBuilder(root) {
+      root.innerHTML = `
+        <section class="section fade-in" aria-label="AI Website Builder">
+          <h2>AI Website Builder</h2>
+          <p class="muted">Choose a template and edit fields. Live preview updates as you type. Export when ready.</p>
+          <div class="cards-grid">
+            ${['Gaming','Portfolio','Tech','Shop'].map(t => `<div class="card"><h3>${t}</h3><p>Neon ${t.toLowerCase()} template.</p></div>`).join('')}
+          </div>
+
+          <div class="chat-wrap section">
+            <div class="chat-box">
+              <div id="builderChat" class="chat-messages" aria-live="polite"></div>
+              <div class="section">
+                <div class="form-row">
+                  <select id="siteType" class="input" aria-label="Site type">
+                    <option>Gaming</option><option>Portfolio</option><option>Tech</option><option>Shop</option>
+                  </select>
+                  <select id="themeColor" class="input" aria-label="Theme color">
+                    <option>neon</option><option>blue</option><option>magenta</option><option>mono</option>
+                  </select>
+                </div>
+                <input id="titleIn" class="input" placeholder="Title">
+                <input id="descIn" class="input" placeholder="Description">
+                <input id="imageIn" class="input" placeholder="Main image URL (optional)">
+                <div class="section">
+                  <button id="builderSend" class="btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Update Preview</button>
+                  <button id="exportSite" class="btn btn-outline"><i class="fa-solid fa-file-zipper"></i> Export HTML</button>
+                </div>
+              </div>
+            </div>
+            <div class="preview-box">
+              <iframe id="builderFrame" style="width:100%; height:560px; border:0; border-radius:12px; background:#111;"></iframe>
+            </div>
+          </div>
+        </section>
+
+        <div class="credit">Made by Furqan Chattha © Tipde 2025</div>
+      `;
+      const chat = $('#builderChat');
+      const frame = $('#builderFrame');
+      const siteType = $('#siteType');
+      const theme = $('#themeColor');
+      const titleIn = $('#titleIn');
+      const descIn = $('#descIn');
+      const imageIn = $('#imageIn');
+
+      const currentSite = { id:`site_${Date.now()}`, type:'Gaming', theme:'neon', title:'My Neon Site', desc:'Welcome to TIPDE!', image:'' };
+      function addMsg(txt, who='ai') {
+        const wrap = document.createElement('div');
+        wrap.className = `chat-bubble ${who}`;
+        wrap.innerHTML = `${txt}<div class="chat-meta">${new Date().toLocaleTimeString()}</div>`;
+        chat.appendChild(wrap); chat.scrollTop = chat.scrollHeight;
+      }
+      function updatePreview() {
+        const colorMap = { neon:'#8a2be2', blue:'#00f0ff', magenta:'#ff00ff', mono:'#e0e0e0' };
+        const accent = colorMap[currentSite.theme] || '#8a2be2';
+        const imgTag = currentSite.image ? `<img src="${currentSite.image}" alt="" style="width:100%; border-radius:12px; border:1px solid rgba(255,255,255,0.12)">` : '';
+        const html = `
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{margin:0;background:#0a0a0f;color:#f5f7ff;font-family:Poppins,Inter,sans-serif}
+header{padding:24px;text-align:center;background:radial-gradient(600px 240px at 20% 0%, rgba(138,43,226,0.35), transparent)}
+h1{margin:0;text-shadow:0 0 12px ${accent}; font-family: Orbitron, Poppins}
+nav{display:flex;gap:10px;justify-content:center;margin:12px}
+nav a{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.12)}
+.card{max-width:900px;margin:18px auto;padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);background:rgba(16,16,24,0.6)}
+.btn{display:inline-block;padding:10px 16px;border-radius:12px;background:linear-gradient(135deg, ${accent}, rgba(0,240,255,0.35), rgba(255,0,255,0.25));color:white}
+</style></head><body>
+<header><h1>${currentSite.title}</h1><div>${currentSite.desc}</div></header>
+<nav><a href="#">Home</a><a href="#">About</a><a href="#">Contact</a></nav>
+<section class="card">
+  <h2>${currentSite.type} Landing</h2>
+  <p>Powered by TIPDE Builder — ${currentSite.theme} theme.</p>
+  ${imgTag}
+  <a class="btn" href="#">Get Started</a>
+</section>
+</body></html>`;
+        frame.srcdoc = html;
+      }
+      $('#builderSend').onclick = () => {
+        currentSite.type = siteType.value;
+        currentSite.theme = theme.value;
+        currentSite.title = titleIn.value || currentSite.title;
+        currentSite.desc = descIn.value || currentSite.desc;
+        currentSite.image = imageIn.value || '';
+        addMsg('Preview updated. ✨');
+        updatePreview();
+      };
+      $('#exportSite').onclick = () => {
+        const blob = new Blob([frame.srcdoc || ''], { type: 'text/html' });
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${currentSite.id}.html`; a.click();
+        URL.revokeObjectURL(a.href);
+      };
+      addMsg('Select a template, customize fields, and click Update Preview.');
+      updatePreview();
+    }
+
+    function renderCompiler(root) {
+      root.innerHTML = `
+        <section class="section fade-in" aria-label="Code Compiler">
+          <h2>Code Compiler</h2>
+          <p class="muted">Languages: HTML, CSS, JS, Python via Pyodide. C++ via WASM (future).</p>
+          <div class="code-wrap">
+            <div>
+              <div class="section" style="display:flex; gap:8px; flex-wrap:wrap">
+                <button id="tab-html" class="btn btn-outline">HTML</button>
+                <button id="tab-css" class="btn btn-outline">CSS</button>
+                <button id="tab-js" class="btn btn-outline">JS</button>
+                <button id="tab-python" class="btn btn-outline">Python</button>
+                <button id="tab-cpp" class="btn btn-outline">C++ (placeholder)</button>
+              </div>
+              <div id="editor" class="code-editor" contenteditable spellcheck="false" aria-label="Code editor"></div>
+              <div class="section" style="display:flex; gap:8px; flex-wrap:wrap">
+                <button id="runCode" class="btn"><i class="fa-solid fa-play"></i> Run</button>
+                <button id="clearCode" class="btn btn-outline"><i class="fa-solid fa-eraser"></i> Clear</button>
+                <button id="downloadCode" class="btn btn-outline"><i class="fa-solid fa-file-arrow-down"></i> Download</button>
+              </div>
+              <div id="console" class="console" aria-live="polite"></div>
+            </div>
+            <div>
+              <iframe id="liveFrame" style="width:100%; height:420px; border:0; border-radius:12px; background:#0a0a0f;"></iframe>
+              <div class="credit" style="margin-top:8px">Live preview for HTML/CSS/JS</div>
+            </div>
+          </div>
+        </section>
+
+        <div class="credit">Made by Furqan Chattha © Tipde 2025</div>
+      `;
+      const editor = $('#editor'), consoleEl = $('#console'), frame = $('#liveFrame');
+      let mode = 'html';
+      const samples = {
+        html: '<h1 style="color:#8a2be2">Hello TIPDE</h1><p>Dark neon vibes.</p>',
+        css: 'body{background:#0a0a0a;color:#ffffff;font-family:Inter}',
+        js: 'console.log("Hello from TIPDE JS")',
+        python: 'print("Hello from Python (Pyodide)")',
+        cpp: '#include <stdio.h>\nint main(){ printf("Hello from C++ WASM!\\n"); return 0; }'
+      };
+      editor.textContent = samples.html;
+      const setMode = (m) => { mode=m; editor.textContent = samples[m]; consoleEl.textContent=''; localStorage.setItem('tipde_code_'+m, samples[m]); };
+      $('#tab-html').onclick = () => setMode('html');
+      $('#tab-css').onclick = () => setMode('css');
+      $('#tab-js').onclick = () => setMode('js');
+      $('#tab-python').onclick = () => setMode('python');
+      $('#tab-cpp').onclick = () => setMode('cpp');
+      const saved = localStorage.getItem('tipde_code_'+mode);
+      if (saved) editor.textContent = saved;
+      $('#runCode').onclick = async () => {
+        const code = editor.textContent;
+        localStorage.setItem('tipde_code_'+mode, code);
+        try {
+          if (mode === 'html' || mode === 'css' || mode === 'js') {
+            const html = `
+<!DOCTYPE html><html><head><style>${mode==='css'?code:samples.css}</style></head><body>
+${mode==='html'?code:samples.html}
+<script>${mode==='js'?code:samples.js}<\/script>
+</body></html>`;
+            frame.srcdoc = html;
+            consoleEl.textContent = 'Rendered HTML/CSS/JS.';
+          } else if (mode === 'python') {
+            const pyodide = await loadPyodide();
+            const out = await pyodide.runPythonAsync(code);
+            consoleEl.textContent = String(out ?? 'Executed.');
+          } else {
+            consoleEl.textContent = 'C++ compilation via WASM will be integrated later.\n\n'+code;
+          }
+        } catch (e) { consoleEl.textContent = 'Error:\n'+e.toString(); }
+      };
+      $('#clearCode').onclick = () => { editor.textContent = ''; consoleEl.textContent = ''; };
+      $('#downloadCode').onclick = () => {
+        const blob = new Blob([editor.textContent], { type: 'text/plain' });
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `tipde_${mode}.txt`; a.click(); URL.revokeObjectURL(a.href);
+      };
+    }
+
+    function renderGames(root) {
+      root.innerHTML = `
+        <section class="section fade-in" aria-label="Games Hub">
+          <h2>Top Games</h2>
+          <div class="section" style="display:flex; gap:8px; flex-wrap:wrap">
+            <input id="gameSearch" class="input" placeholder="Search games by name or description" aria-label="Search">
+            <select id="gameSort" class="input" aria-label="Sort">
+              <option value="">Sort: Default</option>
+              <option value="rating">Rating High → Low</option>
+              <option value="az">A → Z</option>
+            </select>
+            <select id="gameFilter" class="input" aria-label="Filter category">
+              <option value="">Filter: All</option>
+              <option>Multiplayer</option><option>Shooter</option><option>Racing</option><option>Open World</option><option>Horror</option><option>Mobile</option><option>RPG</option><option>Indie</option><option>Adventure</option><option>Sim</option><option>Platformer</option><option>MOBA</option><option>Sandbox</option>
+            </select>
+          </div>
+          <div id="gamesGrid" class="cards-grid"></div>
+          <div id="gamesPag" class="section" style="display:flex; gap:8px; flex-wrap:wrap"></div>
+        </section>
+
+        <div class="credit">Made by Furqan Chattha © Tipde 2025</div>
+      `;
+      let page = 1, per = 12;
+      function applySort(arr) {
+        const sort = $('#gameSort').value;
+        const clone = [...arr];
+        if (sort === 'rating') return clone.sort((a,b) => b.rating - a.rating);
+        if (sort === 'az') return clone.sort((a,b) => a.name.localeCompare(b.name));
+        return clone;
+      }
+      function render() {
+        const q = $('#gameSearch').value.toLowerCase();
+        const f = $('#gameFilter').value;
+        const filtered = GAMES.filter(g => (g.name.toLowerCase().includes(q) || g.desc.toLowerCase().includes(q)) && (!f || g.cats.includes(f)));
+        const sorted = applySort(filtered);
+        const total = Math.ceil(sorted.length / per);
+        const slice = sorted.slice((page-1)*per, page*per);
+        const grid = $('#gamesGrid'); grid.innerHTML = '';
+        slice.forEach(g => {
+          const fav = state.favorites.games.includes(g.id);
+          grid.innerHTML += `
+            <article class="card slide-up" aria-label="${g.name}">
+              <div style="height:140px; background:#111; border-radius:12px; margin-bottom:10px"></div>
+              <h3>${g.name}</h3>
+              <p>${g.desc}</p>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px">
+                <span>${starRating(g.rating)}</span>
+                <div>
+                  <a class="btn btn-outline" href="${g.link}" target="_blank" rel="noopener">Visit</a>
+                  <button class="btn btn-outline favGameBtn" data-id="${g.id}">${fav ? 'Saved' : 'Favorite'}</button>
+                </div>
+              </div>
+            </article>`;
+        });
+        const pag = $('#gamesPag'); pag.innerHTML = '';
+        for (let p=1; p<=total; p++) pag.innerHTML += `<button class="btn ${p===page?'':'btn-outline'}" data-p="${p}">${p}</button>`;
+        $$('#gamesPag .btn').forEach(b => b.onclick = () => { page = parseInt(b.dataset.p,10); render(); });
+        $$('.favGameBtn').forEach(btn => btn.onclick = () => toggleFavorite('games', btn.dataset.id, btn));
+      }
+      function toggleFavorite(type, id, btn) {
+        const list = state.favorites[type];
+        const idx = list.indexOf(id);
+        if (idx >= 0) list.splice(idx, 1);
+        else list.push(id);
+        localStorage.setItem('tipde_favorites', JSON.stringify(state.favorites));
+        btn.textContent = idx >= 0 ? 'Favorite' : 'Saved';
+      }
+      $('#gameSearch').oninput = () => { page=1; render(); };
+      $('#gameSort').onchange = () => { page=1; render(); };
+      $('#gameFilter').onchange = () => { page=1; render(); };
+      render();
+    }
+
+    function renderStreaming(root) {
+      root.innerHTML = `
+        <section class="section fade-in" aria-label="Streaming Directory">
+          <h2>Streaming & Editors</h2>
+          <div class="section" style="display:flex; gap:8px; flex-wrap:wrap">
+            <select id="regionFilter" class="input" aria-label="Region">
+              <option value="">All Regions</option>
+              <option>Global</option>
+              <option>Pakistan</option>
+              <option>India</option>
+            </select>
+          </div>
+          <h3>Streaming Apps</h3>
+          <div id="streamGrid" class="cards-grid"></div>
+          <h3 style="margin-top:24px">Editing Apps ✂️</h3>
+          <div id="editorGrid" class="cards-grid"></div>
+        </section>
+
+        <div class="credit">Made by Furqan Chattha © Tipde 2025</div>
+      `;
+      function render() {
+        const region = $('#regionFilter').value;
+        const grid = $('#streamGrid'); grid.innerHTML = '';
+        STREAMING.filter(s => !region || s.cats.includes(region)).forEach(s => {
+          grid.innerHTML += `
+            <article class="card slide-up" aria-label="${s.name}">
+              <div style="height:140px; background:#111; border-radius:12px; margin-bottom:10px"></div>
+              <h3>${s.name}</h3>
+              <p>${s.desc}</p>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px">
+                <span>${starRating(s.rating)}</span>
+                <div>
+                  <a class="btn btn-outline" href="${s.link}" target="_blank" rel="noopener">Visit</a>
+                </div>
+              </div>
+            </article>`;
+        });
+        const egrid = $('#editorGrid'); egrid.innerHTML = '';
+        EDITORS.forEach(e => {
+          egrid.innerHTML += `
+            <article class="card slide-up" aria-label="${e.name}">
+              <div style="height:140px; background:#111; border-radius:12px; margin-bottom:10px"></div>
+              <h3>${e.name}</h3>
+              <p>${e.desc}</p>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px">
+                <span>${starRating(e.rating)}</span>
+                <div><a class="btn btn-outline" href="${e.link}" target="_blank" rel="noopener">Open</a></div>
+              </div>
+            </article>`;
+        });
+      }
+      $('#regionFilter').onchange = render;
+      render();
+    }
+
+    function renderTools(root) {
+      root.innerHTML = `
+        <section class="section fade-in" aria-label="AI Tools">
+          <h2>AI Tools Catalog</h2>
+          <div class="section" style="display:flex; gap:8px; flex-wrap:wrap">
+            <input id="toolSearch" class="input" placeholder="Search tools" aria-label="Search tools">
+            <select id="toolCategory" class="input" aria-label="Category">
+              <option value="">All</option>
+              <option>Chatbot</option><option>AI Website Builders</option><option>Code Generators</option>
+              <option>Design AI</option><option>Editors</option><option>Video</option><option>Audio</option>
+              <option>Data</option><option>Deploy</option><option>APIs</option><option>Search</option>
+            </select>
+            <select id="toolPrice" class="input" aria-label="Price">
+              <option value="">Any</option><option>Free</option><option>Paid</option>
+            </select>
+          </div>
+          <div id="toolsGrid" class="cards-grid"></div>
+        </section>
+
+        <div class="credit">Made by Furqan Chattha © Tipde 2025</div>
+      `;
+      function render() {
+        const q = $('#toolSearch').value.toLowerCase();
+        const c = $('#toolCategory').value;
+        const p = $('#toolPrice').value;
+        const filtered = AI_TOOLS.filter(t => {
+          const matchQ = t.name.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q);
+          const matchC = !c || t.cats.includes(c);
+          const matchP = !p || t.price === p;
+          return matchQ && matchC && matchP;
+        });
+        const grid = $('#toolsGrid'); grid.innerHTML = '';
+        filtered.forEach(t => {
+          const fav = state.favorites.tools.includes(t.id);
+          grid.innerHTML += `
+            <article class="card slide-up" aria-label="${t.name}">
+              <div style="height:140px; background:#111; border-radius:12px; margin-bottom:10px"></div>
+              <h3>${t.name}</h3>
+              <p>${t.desc}</p>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px">
+                <span>${starRating(t.rating)}</span>
+                <div>
+                  <a class="btn btn-outline" href="${t.link}" target="_blank" rel="noopener">Visit</a>
+                  <button class="btn btn-outline favToolBtn" data-id="${t.id}">${fav ? 'Saved' : 'Favorite'}</button>
+                </div>
+              </div>
+              <div class="badge" style="margin-top:8px">${t.cats.join(', ')} • ${t.price}</div>
+            </article>`;
+        });
+        $$('.favToolBtn').forEach(btn => btn.onclick = () => toggleFavorite('tools', btn.dataset.id, btn));
+      }
+      function toggleFavorite(type, id, btn) {
+        const list = state.favorites[type];
+        const idx = list.indexOf(id);
+        if (idx >= 0) list.splice(idx, 1); else list.push(id);
+        localStorage.setItem('tipde_favorites', JSON.stringify(state.favorites));
+        btn.textContent = idx >= 0 ? 'Favorite' : 'Saved';
+      }
+      $('#toolSearch').oninput = render;
+      $('#toolCategory').onchange = render;
+      $('#toolPrice').onchange = render;
+      render();
+    }
+
+    function renderChatbot(root) {
+      root.innerHTML = `
+        <section class="section fade-in" aria-label="Chatbot Playground">
+          <h2>Chatbot Playground</h2>
+          <p class="muted">Fake responses for now. Choose mode and chat — avatars & timestamps included.</p>
+          <div class="chat-wrap">
+            <div class="chat-box">
+              <div class="section" style="display:flex; gap:8px; flex-wrap:wrap">
+                <select id="botMode" class="input" aria-label="Mode"><option>Creative</option><option>Coder</option><option>Tutor</option></select>
+                <button class="btn btn-outline suggest">Write a sci-fi microstory</button>
+                <button class="btn btn-outline suggest">Explain async JS to me</button>
+                <button class="btn btn-outline suggest">Help debug a Python loop</button>
+              </div>
+              <div id="chatLog" class="chat-messages" aria-live="polite"></div>
+              <div class="section" style="display:flex; gap:8px; flex-wrap:wrap">
+                <input id="chatInput" class="input" placeholder="Type a message…" aria-label="Message">
+                <button id="chatSend" class="btn"><i class="fa-solid fa-paper-plane"></i> Send</button>
+                <button id="chatClear" class="btn btn-outline"><i class="fa-solid fa-trash"></i> Clear</button>
+              </div>
+            </div>
+            <div class="preview-box">
+              <h3>Notes</h3>
+              <p>Chat history is saved locally in this single-file version.</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="credit">Made by Furqan Chattha © Tipde 2025</div>
+      `;
+      const chatLog = $('#chatLog'), input = $('#chatInput'), modeEl = $('#botMode');
+      function add(who, txt) {
+        const bubble = document.createElement('div');
+        bubble.className = `chat-bubble ${who}`;
+        bubble.innerHTML = `<span>${who === 'user' ? '🧑' : '🤖'} ${txt}</span><div class="chat-meta">${new Date().toLocaleTimeString()}</div>`;
+        chatLog.appendChild(bubble); chatLog.scrollTop = chatLog.scrollHeight;
+        const store = JSON.parse(localStorage.getItem('tipde_chat') || '[]');
+        store.push({ who, txt, mode: modeEl.value, ts: Date.now() });
+        localStorage.setItem('tipde_chat', JSON.stringify(store));
+      }
+      function respond(txt) {
+        const m = modeEl.value;
+        let r = '';
+        if (m === 'Creative') r = `Creative vibe: ${txt} — add neon dreams and synthwave twists.`;
+        else if (m === 'Coder') r = `Coding tip: break problems down. For "${txt}", start with pseudo-code and test small units.`;
+        else r = `Tutor mode: let's explain "${txt}" step-by-step with examples and questions.`;
+        add('ai', r);
+      }
+      $$('.suggest').forEach(b => b.onclick = () => { input.value = b.textContent; input.focus(); });
+      $('#chatSend').onclick = () => {
+        const txt = input.value.trim(); if (!txt) return;
+        add('user', txt); add('ai', 'Typing…');
+        setTimeout(() => { chatLog.lastChild.remove(); respond(txt); }, 800);
+        input.value = '';
+      };
+      $('#chatClear').onclick = () => { chatLog.innerHTML = ''; localStorage.removeItem('tipde_chat'); };
+    }
+
+    function renderProfile(root) {
+      root.innerHTML = `
+        <section class="section fade-in" aria-label="Profile">
+          <h2>Profile</h2>
+          <div class="card">
+            <p><strong>Creator:</strong> Furqan Chattha</p>
+            <p><strong>User:</strong> ${state.user?.name || 'Guest'}</p>
+            <p class="muted">Profile editing coming soon.</p>
+          </div>
+        </section>
+
+        <div class="credit">Made by Furqan Chattha © Tipde 2025</div>
+      `;
+    }
+
+    // ---------- Typewriter ----------
+    function typewriter(el, arr, speed=80, hold=1200) {
+      let idx=0, sub=0, del=false;
+      (function tick(){
+        const word = arr[idx % arr.length];
+        el.textContent = del ? word.substring(0, sub--) : word.substring(0, sub++);
+        if (!del && sub > word.length) { del = true; setTimeout(tick, hold); return; }
+        if (del && sub <= 0) { del = false; idx++; }
+        setTimeout(tick, speed);
+      })();
+    }
+
+    // ---------- Notes for Firebase ----------
+    /* To enable real authentication:
+       - Include Firebase v10 modular SDK and initialize with your config
+       - Replace local demo in renderLogin with signInWithEmailAndPassword and Google sign-in
+       - Persist user object to localStorage after onAuthStateChanged
+       - Guard protected routes via 'guard(true)' and redirect unauthorized to #/login
+       - Use Firestore to store favorites and profiles
+    */
+  </script>
+</body>
+</html>
