@@ -1,6 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+
+// Define dataLayer and the gtag function.
+
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){dataLayer.push(arguments);}
+
+ 
+// IMPORTANT - DO NOT COPY/PASTE WITHOUT MODIFYING REGION LIST
+
+// Set default consent for specific regions according to your requirements
+
+gtag('consent', 'default', {
+
+  'ad_storage': 'denied',
+
+  'ad_user_data': 'denied',
+
+  'ad_personalization': 'denied',
+
+  'analytics_storage': 'denied',
+
+ 'regions':[<list of ISO 3166-2 region codes>]
+
+});
+
+// Set default consent for all other regions according to your requirements
+
+gtag('consent', 'default', {
+
+  'ad_storage': 'denied',
+
+  'ad_user_data': 'denied',
+
+  'ad_personalization': 'denied',
+
+  'analytics_storage': 'denied'
+
+});
+
+</script>
+
+<!--Banner script here!-->
   <script type="text/javascript">
 var _iub = _iub || [];
 _iub.csConfiguration = {"siteId":4307011,"cookiePolicyId":37320254,"lang":"en","storage":{"useSiteId":true}};
@@ -1172,6 +1216,7 @@ ${mode==='html'?code:samples.html}
 </body>
 
 </html>
+
 
 
 
