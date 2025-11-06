@@ -1,22 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://tipde.top/</loc>
-  </url>
-  <url>
-    <loc>https://tipde.top/#/aitools</loc>
-  </url>
-  <url>
-    <loc>https://tipde.top/#/games</loc>
-  </url>
-  <url>
-    <loc>https://tipde.top/#/streaming</loc>
-  </url>
-  <url>
-    <loc>https://tipde.top/#/compiler</loc>
-  </url>
-  <url>
-    <loc>https://tipde.top/#/chatbot</loc>
-  </url>
+  <url><loc>https://tipde.top/?_escaped_fragment_=/</loc></url>
+  <url><loc>https://tipde.top/?_escaped_fragment_=/aitools</loc></url>
+  <url><loc>https://tipde.top/?_escaped_fragment_=/games</loc></url>
+  <url><loc>https://tipde.top/?_escaped_fragment_=/streaming</loc></url>
+  <url><loc>https://tipde.top/?_escaped_fragment_=/compiler</loc></url>
+  <url><loc>https://tipde.top/?_escaped_fragment_=/chatbot</loc></url>
 </urlset>
-
