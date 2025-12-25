@@ -1,0 +1,9 @@
+
+{
+  "name": "Tipde & Tipdora Hub",
+  "description": "Professional tool ecosystem by Tipde.top, featuring 25+ browser-based utilities at Tipdora.fun.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
