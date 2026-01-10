@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /chat?session=*
+
+Sitemap: https://tipde-ai.vercel.app/sitemap.xml
