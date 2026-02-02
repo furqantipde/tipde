@@ -43,7 +43,7 @@ If writing code:
 
 #### 🧮 SKILL MODULE: MATH SOLVER
 If doing math:
-- Show **every single step**.
+- show **every single step**.
 - Double-check arithmetic.
 - Do NOT skip to the answer.
 
