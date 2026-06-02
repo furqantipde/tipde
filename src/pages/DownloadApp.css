@@ -1,0 +1,95 @@
+.download-page-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: radial-gradient(circle at 50% 10%, #2a2a35 0%, #1e1e24 100%);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+}
+
+.download-card {
+  width: min(100%, 900px);
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+
+.download-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(16, 163, 127, 0.14);
+  color: #8ee2c6;
+  border-radius: 9999px;
+  padding: 0.65rem 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.5rem;
+}
+
+.download-title {
+  font-size: clamp(2.5rem, 3vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.05;
+  background: linear-gradient(135deg, #6EE7B7 0%, #3B82F6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.download-description {
+  color: #cbd5e1;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+.download-button {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #10a37f 0%, #0d8a6a 100%);
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 14px 30px rgba(16, 163, 127, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.download-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(16, 163, 127, 0.4);
+}
+
+.download-note {
+  margin-top: 1.5rem;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.download-back-link {
+  display: inline-block;
+  margin-top: 2rem;
+  color: #a5f3fc;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.download-back-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .download-card {
+    padding: 2rem 1.5rem;
+  }
+}

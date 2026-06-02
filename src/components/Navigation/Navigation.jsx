@@ -50,6 +50,13 @@ const Navigation = () => {
                         Chat
                     </Link>
                     <Link
+                        to="/download"
+                        className="nav-link"
+                        onClick={() => setMobileMenuOpen(false)}
+                    >
+                        Download
+                    </Link>
+                    <Link
                         to="/about"
                         className="nav-link"
                         onClick={() => setMobileMenuOpen(false)}

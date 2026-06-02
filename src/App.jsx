@@ -7,6 +7,7 @@ import ContactUs from './pages/ContactUs'
 import AboutUs from './pages/AboutUs'
 import Disclaimer from './pages/Disclaimer'
 import CookiePolicy from './pages/CookiePolicy'
+import DownloadApp from './pages/DownloadApp'
 import Navigation from './components/Navigation/Navigation'
 import Footer from './components/Footer/Footer'
 
@@ -37,6 +38,7 @@ function App() {
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/download" element={<DownloadApp />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/disclaimer" element={<Disclaimer />} />
             <Route path="/cookies" element={<CookiePolicy />} />
