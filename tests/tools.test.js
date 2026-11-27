@@ -158,6 +158,12 @@ describe('document tools', () => {
 })
 
 describe('SEO routes', () => {
+  it('uses the tools hub title and description on the homepage', () => {
+    const home = getRouteMeta('/')
+    expect(home.title).toBe('Tools Hub by Tipde')
+    expect(home.description).toContain('15 free browser-based developer tools')
+  })
+
   it('provides unique metadata for every route', () => {
     const routes = getAllRoutes()
     expect(routes.length).toBeGreaterThanOrEqual(38)

@@ -6,7 +6,7 @@ import { legalPages } from '../config/legal.js'
 
 const staticPages = {
   '/': {
-    title: 'Tipde — Developer Tools. Made Simple.',
+    title: 'Tools Hub by Tipde',
     description: site.description,
   },
   '/tools/': {
@@ -53,7 +53,8 @@ export function getRouteMeta(pathname = '/') {
       ld: path === '/' ? {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        name: site.name,
+        name: 'Tools Hub by Tipde',
+        alternateName: site.name,
         url: site.url,
         description: site.description,
         potentialAction: {
