@@ -89,7 +89,7 @@ Analytics is loaded **only after the visitor accepts non-essential cookies** and
 
 ## Publishing to GitHub
 
-The public repository is **https://github.com/furqantipde/tipde** and GitHub Pages is enabled with **GitHub Actions** as the build source. The site is live at **https://furqantipde.github.io/tipde/**.
+The public repository is **https://github.com/furqantipde/tipde** and GitHub Pages is enabled with **GitHub Actions** as the build source. The site is live at **https://tipde.online/** (custom domain connected via Cloudflare).
 
 The workflow in `.github/workflows/deploy.yml` builds and publishes `dist/` automatically on every push to `main`. To reproduce a fresh publication:
 
@@ -111,7 +111,7 @@ Add repository secrets `VITE_GA_MEASUREMENT_ID` and `VITE_GSC_VERIFICATION` if y
 
 1. In Cloudflare DNS, add a `CNAME` record named `tipde` pointing to `furqantipde.github.io` (proxy off/"DNS only" is simplest initially). Alternatively use `A` records to the GitHub Pages IPs for the apex domain.
 2. In GitHub repository **Settings → Pages → Custom domain**, enter `tipde.online` and save. The included `public/CNAME` file is copied into `dist/` automatically.
-3. Once DNS is active, create a repository variable named `VITE_BASE_PATH` with value `/` (Repository settings → Secrets and variables → Actions → Variables). The next deployment then uses root-relative assets for `tipde.online`. Until then the workflow defaults to `/tipde/` for the github.io project URL.
+3. The repository variable `VITE_BASE_PATH` is already set to `/` for the custom domain (Repository settings → Secrets and variables → Actions → Variables). If you revert to the github.io project URL, remove the variable so the workflow falls back to `/tipde/`.
    - Locally: `$env:VITE_BASE_PATH='/' ; npm run build` on PowerShell, or `VITE_BASE_PATH=/ npm run build` on bash.
 4. Enable **Enforce HTTPS** in GitHub Pages once DNS has propagated.
 5. Submit `https://tipde.online/sitemap.xml` in Google Search Console.
