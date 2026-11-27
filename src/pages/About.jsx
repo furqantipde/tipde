@@ -23,7 +23,7 @@ export default function About() {
           <Card className="p-6">
             <ShieldIcon className="mb-4 text-brand-500" />
             <h2 className="font-semibold">Private by design</h2>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">Your input is not sent to a server or included in analytics. Preferences stay in your browser.</p>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">Your input is not sent to a server, analytics or ads. Preferences stay in your browser.</p>
           </Card>
         </div>
 

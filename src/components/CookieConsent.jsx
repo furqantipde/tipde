@@ -25,7 +25,7 @@ export default function CookieConsent() {
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 p-4 shadow-2xl backdrop-blur dark:border-slate-800 dark:bg-slate-900/95" role="dialog" aria-label="Cookie preferences">
       <Container className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-3xl text-sm text-slate-600 dark:text-slate-300">
-          We use essential local storage for your preferences. With your permission, we also load privacy-friendly analytics. Tool input is never collected. See our{' '}
+          We use essential local storage for your preferences. With your permission, we also load analytics and ads. Tool input is never collected. See our{' '}
           <a className="font-medium text-brand-600 underline" href="/cookie-policy/">Cookie Policy</a>.
         </p>
         <div className="flex shrink-0 gap-2">

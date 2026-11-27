@@ -18,7 +18,7 @@ const homeFaqs = [
   },
   {
     q: 'Is my code uploaded anywhere?',
-    a: 'No. Tools run in your browser, so your input stays on your device. Some pages load fonts or optional analytics, but tool input is never transmitted.',
+    a: 'No. Tools run in your browser, so your input stays on your device. Some pages load fonts, optional analytics and ads, but tool input is never transmitted.',
   },
   {
     q: 'Can I use Tipde on mobile?',

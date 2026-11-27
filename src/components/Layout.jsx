@@ -2,6 +2,7 @@ import Analytics from './Analytics.jsx'
 import CookieConsent from './CookieConsent.jsx'
 import Footer from './Footer.jsx'
 import Header from './Header.jsx'
+import MonetagAds from './MonetagAds.jsx'
 import SEO from './SEO.jsx'
 
 export default function Layout({ children }) {
@@ -13,6 +14,7 @@ export default function Layout({ children }) {
       <Footer />
       <CookieConsent />
       <Analytics />
+      <MonetagAds />
     </div>
   )
 }

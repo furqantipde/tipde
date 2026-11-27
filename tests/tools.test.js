@@ -8,6 +8,8 @@ import { dateToTimestamp, timestampToDate } from '../src/utils/datetime.js'
 import { getAllRoutes, getRouteMeta, renderMetaTags } from '../src/utils/seo.js'
 import { tools, getTool } from '../src/config/tools.js'
 import { categories } from '../src/config/categories.js'
+import { site } from '../src/config/site.js'
+import { legalPages } from '../src/config/legal.js'
 import {
   formatBytes,
   isImageFile,
@@ -192,5 +194,19 @@ describe('Head scripts', () => {
   it('adds the monetag verification meta', () => {
     const head = renderMetaTags(getRouteMeta('/'))
     expect(head).toContain('<meta name="monetag" content="c779a9462a921abf9636fcd4e1e40fad" />')
+  })
+})
+
+describe('Advertising', () => {
+  it('configures the Monetag zone and script', () => {
+    expect(site.monetagZone).toBe('316799')
+    expect(site.monetagScriptSrc).toBe('https://quge5.com/88/tag.min.js')
+  })
+
+  it('documents consent-gated advertising in the legal pages', () => {
+    const privacy = legalPages['privacy-policy'].body.map((block) => block.text).join(' ')
+    const cookies = legalPages['cookie-policy'].body.map((block) => block.text).join(' ')
+    expect(privacy).toContain('Monetag script is loaded only after you accept non-essential cookies')
+    expect(cookies).toContain('Choosing Essential only prevents the Monetag script from loading')
   })
 })

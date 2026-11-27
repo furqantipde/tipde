@@ -16,9 +16,9 @@ function applyConsent(value) {
   const granted = value === 'all'
   window.gtag('consent', 'update', {
     analytics_storage: granted ? 'granted' : 'denied',
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
+    ad_storage: granted ? 'granted' : 'denied',
+    ad_user_data: granted ? 'granted' : 'denied',
+    ad_personalization: granted ? 'granted' : 'denied',
   })
 }
 
