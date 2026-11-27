@@ -5,6 +5,16 @@ import { generatePassword, generateUuids, uuidv4 } from '../src/utils/generators
 import { countText } from '../src/utils/counters.js'
 import { dateToTimestamp, timestampToDate } from '../src/utils/datetime.js'
 import { getAllRoutes, getRouteMeta } from '../src/utils/seo.js'
+import { tools, getTool } from '../src/config/tools.js'
+import { categories } from '../src/config/categories.js'
+import {
+  formatBytes,
+  isImageFile,
+  isPdfFile,
+  normalizeTextItems,
+  rowsToParagraphs,
+  safeBaseName,
+} from '../src/utils/fileTools.js'
 
 describe('JSON tools', () => {
   it('formats valid JSON with indentation', () => {
@@ -104,10 +114,53 @@ describe('counters and time', () => {
   })
 })
 
+describe('document tools', () => {
+  it('formats file sizes safely', () => {
+    expect(formatBytes(1536)).toBe('1.5 KB')
+    expect(formatBytes(0)).toBe('0 B')
+  })
+
+  it('creates safe download names', () => {
+    expect(safeBaseName('My Report (final).PDF')).toBe('My-Report-final')
+    expect(safeBaseName('')).toBe('document')
+  })
+
+  it('recognizes supported file types', () => {
+    expect(isPdfFile({ name: 'report.PDF', type: '' })).toBe(true)
+    expect(isImageFile({ name: 'scan.jpeg', type: '' })).toBe(true)
+    expect(isPdfFile({ name: 'image.jpg', type: 'image/jpeg' })).toBe(false)
+  })
+
+  it('groups text items into readable rows and paragraphs', () => {
+    const rows = normalizeTextItems([
+      { str: 'Hello', transform: [1, 0, 0, 1, 10, 100], height: 10 },
+      { str: ' world', transform: [1, 0, 0, 1, 50, 100], height: 10 },
+      { str: 'Second line', transform: [1, 0, 0, 1, 10, 80], height: 10 },
+    ])
+    expect(rows.map((row) => row.text)).toEqual(['Hello world', 'Second line'])
+    expect(rowsToParagraphs(rows)).toEqual(['Hello world', 'Second line'])
+  })
+
+  it('registers every document tool with complete SEO metadata', () => {
+    const slugs = ['pdf-to-word', 'jpg-to-pdf', 'compress-pdf', 'merge-pdf', 'pdf-to-jpg']
+    expect(categories.some((category) => category.slug === 'document-tools')).toBe(true)
+    slugs.forEach((slug) => {
+      const tool = getTool(slug)
+      expect(tool).toBeDefined()
+      expect(tool.category).toBe('document-tools')
+      expect(tool.instructions.length).toBeGreaterThanOrEqual(3)
+      expect(tool.faqs.length).toBeGreaterThanOrEqual(3)
+      expect(tool.related.length).toBeGreaterThan(0)
+      expect(getRouteMeta(`/tools/${slug}/`).title).toBe(`${tool.name} | Tipde`)
+    })
+  })
+})
+
 describe('SEO routes', () => {
   it('provides unique metadata for every route', () => {
     const routes = getAllRoutes()
-    expect(routes.length).toBeGreaterThanOrEqual(30)
+    expect(routes.length).toBeGreaterThanOrEqual(38)
+    expect(tools.length).toBeGreaterThanOrEqual(15)
     const titles = routes.map((route) => getRouteMeta(route).title)
     expect(new Set(titles).size).toBe(titles.length)
   })

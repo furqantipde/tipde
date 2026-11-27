@@ -47,6 +47,12 @@ export const categories = [
     description: 'Small utilities that support search-friendly development workflows.',
     icon: '↗',
   },
+  {
+    slug: 'document-tools',
+    name: 'Document Tools',
+    description: 'Convert, combine and compress PDFs and images directly in your browser.',
+    icon: 'PDF',
+  },
 ]
 
 export function getCategory(slug) {

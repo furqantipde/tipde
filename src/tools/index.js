@@ -4,6 +4,11 @@ import HtmlFormatter from './HtmlFormatter.jsx'
 import JsMinifier from './JsMinifier.jsx'
 import JsonFormatter from './JsonFormatter.jsx'
 import PasswordGenerator from './PasswordGenerator.jsx'
+import PdfToJpgTool from './PdfToJpgTool.jsx'
+import PdfToWordTool from './PdfToWordTool.jsx'
+import JpgToPdfTool from './JpgToPdfTool.jsx'
+import CompressPdfTool from './CompressPdfTool.jsx'
+import MergePdfTool from './MergePdfTool.jsx'
 import TimestampConverter from './TimestampConverter.jsx'
 import UrlEncoder from './UrlEncoder.jsx'
 import UuidGenerator from './UuidGenerator.jsx'
@@ -20,4 +25,9 @@ export const toolComponents = {
   'password-generator': PasswordGenerator,
   'word-counter': WordCounter,
   'timestamp-converter': TimestampConverter,
+  'pdf-to-word': PdfToWordTool,
+  'jpg-to-pdf': JpgToPdfTool,
+  'compress-pdf': CompressPdfTool,
+  'merge-pdf': MergePdfTool,
+  'pdf-to-jpg': PdfToJpgTool,
 }

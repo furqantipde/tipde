@@ -11,11 +11,11 @@ const staticPages = {
   },
   '/tools/': {
     title: 'All Developer Tools | Tipde',
-    description: 'Browse every free Tipde tool: JSON, HTML, CSS, JavaScript, encoding, generators and more.',
+    description: 'Browse every free Tipde tool: JSON, HTML, CSS, JavaScript, PDF conversion, image tools, encoding and generators.',
   },
   '/categories/': {
     title: 'Tool Categories | Tipde',
-    description: 'Explore Tipde developer tools by category, from JSON formatting to code generators.',
+    description: 'Explore Tipde tools by category, from JSON formatting and code generators to PDF and image conversion.',
   },
   '/blog/': {
     title: 'Developer Tutorials & Guides | Tipde',

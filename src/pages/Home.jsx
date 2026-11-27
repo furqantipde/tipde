@@ -26,7 +26,7 @@ const homeFaqs = [
   },
   {
     q: 'How many tools are available?',
-    a: 'Tipde launched with ten fully working tools and will grow over time. You can see everything on the All Tools page.',
+    a: `Tipde includes ${tools.length} fully working tools and will keep growing. You can see everything on the All Tools page.`,
   },
 ]
 
@@ -51,7 +51,7 @@ export default function Home() {
     <>
       <Section className="relative overflow-hidden border-b border-slate-200 bg-gradient-to-b from-brand-50/70 via-white to-white py-16 sm:py-24 dark:border-slate-800 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950">
         <Container className="relative max-w-4xl text-center">
-          <Badge className="mb-6">10 free tools · No sign-up required</Badge>
+          <Badge className="mb-6">{tools.length} free tools · No sign-up required</Badge>
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl">Developer Tools. <span className="text-brand-500">Made Simple.</span></h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
             Free online tools to format, convert, validate and generate code. Fast, simple and accessible everywhere.
@@ -61,7 +61,7 @@ export default function Home() {
           </div>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-300">
             <span>Popular:</span>
-            {['json formatter', 'base64', 'uuid', 'password'].map((term) => (
+            {['json formatter', 'pdf to word', 'base64', 'uuid', 'password'].map((term) => (
               <button key={term} type="button" onClick={() => submit(term)} className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium hover:border-brand-300 hover:text-brand-600 dark:border-slate-700 dark:bg-slate-900 dark:hover:border-brand-700">
                 {term}
               </button>

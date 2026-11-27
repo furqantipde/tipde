@@ -2,11 +2,12 @@
 
 **Developer tools. Made simple.**
 
-Tipde is a free, browser-based developer utilities platform. This repository contains the complete React + Vite + Tailwind CSS implementation, including 10 working tools, individually prerendered SEO pages, legal pages, analytics consent handling and GitHub Pages deployment.
+Tipde is a free, browser-based developer utilities platform. This repository contains the complete React + Vite + Tailwind CSS implementation, including 15 working tools, individually prerendered SEO pages, legal pages, analytics consent handling and GitHub Pages deployment.
 
 ## Features
 
-- **10 working tools:** JSON Formatter, HTML Formatter, CSS Minifier, JavaScript Minifier, Base64 Encoder/Decoder, URL Encoder/Decoder, UUID Generator, Password Generator, Word Counter and Unix Timestamp Converter.
+- **15 working tools:** JSON Formatter, HTML Formatter, CSS Minifier, JavaScript Minifier, Base64 Encoder/Decoder, URL Encoder/Decoder, UUID Generator, Password Generator, Word Counter, Unix Timestamp Converter, PDF to Word, JPG to PDF, Compress PDF, Merge PDF and PDF to JPG.
+- **Document tools run locally:** PDF parsing, DOCX creation, image conversion, merging and compression rely on client-side libraries loaded only when needed. No file is uploaded.
 - **Private by default:** all tool input is processed locally in the browser. No account, no uploads.
 - **SEO-ready:** a dedicated route, unique metadata, canonical URL, FAQ schema and static HTML for every tool, category and article.
 - **Responsive:** desktop, tablet and mobile layouts.
@@ -24,8 +25,8 @@ tipde/
 │   ├── config/             # Site, tools, categories, blog and legal content
 │   ├── hooks/              # Theme, localStorage, copy, favorites, recents
 │   ├── pages/              # Home, tools, categories, blog, legal, tool pages
-│   ├── tools/              # The 10 tool implementations
-│   ├── utils/              # Formatters, encoders, generators, SEO helpers
+│   ├── tools/              # Tool implementations
+│   ├── utils/              # Formatters, encoders, generators, file helpers, SEO helpers
 │   ├── App.jsx             # Route definitions
 │   ├── entry-server.jsx    # SSR render entry used by the prerender script
 │   └── main.jsx            # Browser entry

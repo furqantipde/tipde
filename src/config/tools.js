@@ -330,6 +330,175 @@ export const tools = [
     featured: false,
     added: '2026-11-29',
   },
+  {
+    slug: 'pdf-to-word',
+    name: 'PDF to Word',
+    category: 'document-tools',
+    icon: 'PDF',
+    short: 'Convert PDF pages into an editable DOCX document.',
+    description:
+      'Extract selectable text from a PDF and build an editable Word document entirely in your browser. The tool groups text into lines and paragraphs, keeps page breaks, and produces a standard DOCX file you can download immediately. Nothing is uploaded, and complex layouts are simplified into clean editable text.',
+    keywords: ['pdf to word', 'pdf to docx', 'convert pdf to word', 'pdf to editable document'],
+    example: '',
+    instructions: [
+      'Choose a PDF file with selectable text.',
+      'Press Convert to Word and wait while each page is read locally.',
+      'Download the generated DOCX file and edit it in your word processor.',
+    ],
+    faqs: [
+      {
+        q: 'Will the Word document look exactly like the PDF?',
+        a: 'No. The converter extracts text and rebuilds it as simple paragraphs with page breaks. Complex layouts, columns and decorative graphics are simplified.',
+      },
+      {
+        q: 'Can it convert scanned PDFs?',
+        a: 'Not directly. Scanned pages contain images rather than selectable text, so they need OCR first. The tool reports when no selectable text is found.',
+      },
+      {
+        q: 'Is my PDF uploaded?',
+        a: 'No. PDF parsing and DOCX creation both run in your browser. The file never leaves your device.',
+      },
+    ],
+    related: ['pdf-to-jpg', 'compress-pdf', 'merge-pdf'],
+    featured: true,
+    added: '2026-11-30',
+  },
+  {
+    slug: 'jpg-to-pdf',
+    name: 'JPG to PDF',
+    category: 'document-tools',
+    icon: 'PDF',
+    short: 'Combine JPG and PNG images into one PDF document.',
+    description:
+      'Turn photos, screenshots and scanned pages into a single PDF without uploading them. Add images in any order, choose A4 or US Letter, set the margin, and let the tool fit each image on its own page. Landscape images automatically get landscape pages.',
+    keywords: ['jpg to pdf', 'image to pdf', 'convert jpg to pdf', 'png to pdf', 'photos to pdf'],
+    example: '',
+    instructions: [
+      'Add one or more JPG or PNG images, or drag them into the upload area.',
+      'Use the arrows to arrange the page order.',
+      'Choose a page size and margin, then press Create PDF.',
+      'Download the finished PDF.',
+    ],
+    faqs: [
+      {
+        q: 'Which image formats are supported?',
+        a: 'JPG and PNG files are supported. Both formats are embedded directly, so quality is preserved.',
+      },
+      {
+        q: 'Can I control the page order?',
+        a: 'Yes. Use the up and down arrows beside each image to reorder it before creating the PDF.',
+      },
+      {
+        q: 'Are my images uploaded anywhere?',
+        a: 'No. Images are read locally and the PDF is built in your browser.',
+      },
+    ],
+    related: ['merge-pdf', 'pdf-to-jpg', 'compress-pdf'],
+    featured: true,
+    added: '2026-12-01',
+  },
+  {
+    slug: 'compress-pdf',
+    name: 'Compress PDF',
+    category: 'document-tools',
+    icon: 'PDF',
+    short: 'Reduce PDF file size without uploading it.',
+    description:
+      'Shrink PDF files with two browser-side modes. Structure mode rebuilds PDF objects while keeping text and vector content. Strong mode renders each page as a JPEG for a much smaller file. Tipde compares the result with the original and keeps whichever is smaller.',
+    keywords: ['compress pdf', 'reduce pdf size', 'pdf compressor', 'shrink pdf', 'optimize pdf'],
+    example: '',
+    instructions: [
+      'Choose a PDF file.',
+      'Select Structure only to preserve text, or Strong for the smallest file.',
+      'For Strong mode, adjust render scale and JPEG quality.',
+      'Press Compress PDF and download the result.',
+    ],
+    faqs: [
+      {
+        q: 'Which compression mode should I use?',
+        a: 'Use Structure only when you need selectable text and vectors. Use Strong when file size matters most and image-based pages are acceptable.',
+      },
+      {
+        q: 'Will compression always make the file smaller?',
+        a: 'Not always. Some PDFs are already optimized. If the result is larger, Tipde keeps the original file instead.',
+      },
+      {
+        q: 'Does Strong mode keep text selectable?',
+        a: 'No. Strong mode rasterizes pages into JPEG images, so text becomes part of the image. Structure mode keeps selectable text.',
+      },
+    ],
+    related: ['merge-pdf', 'pdf-to-word', 'pdf-to-jpg'],
+    featured: true,
+    added: '2026-12-02',
+  },
+  {
+    slug: 'merge-pdf',
+    name: 'Merge PDF',
+    category: 'document-tools',
+    icon: 'PDF',
+    short: 'Combine multiple PDF files into one document.',
+    description:
+      'Join two or more PDFs into a single file, in the order you choose. Add files, rearrange them with the arrow controls, and download the merged document. All pages are copied locally in your browser with no upload and no file size limit imposed by Tipde.',
+    keywords: ['merge pdf', 'combine pdf', 'join pdf files', 'pdf merger'],
+    example: '',
+    instructions: [
+      'Add two or more PDF files.',
+      'Use the arrows to arrange them in the order you want.',
+      'Press Merge PDFs.',
+      'Download the combined document.',
+    ],
+    faqs: [
+      {
+        q: 'Can I merge many PDFs at once?',
+        a: 'Yes. Add as many files as you need, as long as your device has enough memory to process them.',
+      },
+      {
+        q: 'Are bookmarks and form fields preserved?',
+        a: 'Pages and their visible content are preserved. Bookmarks, form data and document-level scripts are not merged.',
+      },
+      {
+        q: 'What if a PDF is encrypted?',
+        a: 'Encrypted files usually cannot be read by the browser PDF library. Remove the protection first, then try again.',
+      },
+    ],
+    related: ['jpg-to-pdf', 'compress-pdf', 'pdf-to-jpg'],
+    featured: false,
+    added: '2026-12-03',
+  },
+  {
+    slug: 'pdf-to-jpg',
+    name: 'PDF to JPG',
+    category: 'document-tools',
+    icon: 'PDF',
+    short: 'Export PDF pages as downloadable JPG images.',
+    description:
+      'Render PDF pages into high-quality JPG images with the size and quality you choose. Download every page at once in a ZIP archive, or grab individual pages one by one. Rendering happens locally in your browser, so your documents stay private.',
+    keywords: ['pdf to jpg', 'pdf to image', 'convert pdf to jpg', 'pdf pages to jpeg', 'pdf to pictures'],
+    example: '',
+    instructions: [
+      'Choose a PDF file.',
+      'Select an image size and JPEG quality.',
+      'Press Convert to JPG.',
+      'Download the ZIP archive or individual page images.',
+    ],
+    faqs: [
+      {
+        q: 'What image size will I get?',
+        a: 'Standard is 1× the PDF page size, High is 1.5× and Very high is 2×. Higher sizes produce sharper images and larger files.',
+      },
+      {
+        q: 'Can I download a single page?',
+        a: 'Yes. After conversion, each rendered page has its own download button below the ZIP download.',
+      },
+      {
+        q: 'Is the PDF uploaded?',
+        a: 'No. Pages are rendered with a local PDF engine and exported as images in your browser.',
+      },
+    ],
+    related: ['jpg-to-pdf', 'compress-pdf', 'pdf-to-word'],
+    featured: false,
+    added: '2026-12-04',
+  },
 ]
 
 export const featuredTools = tools.filter((tool) => tool.featured)

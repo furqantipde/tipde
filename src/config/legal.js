@@ -6,7 +6,7 @@ export const legalPages = {
     body: [
       { type: 'p', text: 'Tipde provides free developer tools that run in your browser. This policy explains what information is involved when you use the site.' },
       { type: 'h2', text: 'Tool input and local processing' },
-      { type: 'p', text: 'Text you paste into a tool is processed on your device. Tipde does not upload your code, JSON, CSS or other input to a server, and does not store it in a database. Closing or refreshing the page removes it from memory.' },
+      { type: 'p', text: 'Text you paste into a tool and files you open, including PDFs and images, are processed on your device. Tipde does not upload your code, JSON, CSS, documents or other input to a server, and does not store it in a database. Closing or refreshing the page removes it from memory.' },
       { type: 'h2', text: 'Local preferences' },
       { type: 'p', text: 'Your theme choice, favorite tools and recently used tools are stored in your browser localStorage. These values stay on your device and can be cleared through your browser settings at any time.' },
       { type: 'h2', text: 'Analytics' },

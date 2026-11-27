@@ -2,7 +2,7 @@ export const site = {
   name: 'Tipde',
   tagline: 'Developer tools. Made simple.',
   description:
-    'Free online tools to format, convert, validate and generate code. Fast, simple and accessible everywhere.',
+    'Free online tools to format, convert, compress, validate and generate code and files. Fast, private and accessible everywhere.',
   url: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SITE_URL) || (typeof process !== 'undefined' ? process.env?.VITE_SITE_URL : undefined) || 'https://tipde.online',
   gaMeasurementId: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GA_MEASUREMENT_ID) || (typeof process !== 'undefined' ? process.env?.VITE_GA_MEASUREMENT_ID : undefined) || '',
   gscVerification: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GSC_VERIFICATION) || (typeof process !== 'undefined' ? process.env?.VITE_GSC_VERIFICATION : undefined) || '',
