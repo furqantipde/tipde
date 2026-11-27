@@ -21,9 +21,26 @@ function ScrollToTop() {
   useIsomorphicLayoutEffect(() => {
     const root = document.documentElement
     const previousBehavior = root.style.scrollBehavior
+
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+
     root.style.scrollBehavior = 'auto'
-    window.scrollTo(0, 0)
-    root.style.scrollBehavior = previousBehavior
+    try {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    } catch {
+      window.scrollTo(0, 0)
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      root.style.scrollBehavior = previousBehavior
+    })
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      root.style.scrollBehavior = previousBehavior
+    }
   }, [pathname, search])
 
   return null
