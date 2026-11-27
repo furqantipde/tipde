@@ -83,36 +83,38 @@ Copy `.env.example` to `.env` and adjust as needed:
 | `VITE_GSC_VERIFICATION` | Search Console verification code |
 | `VITE_ENABLE_ADS` | Set `true` only when real ad code is ready |
 | `VITE_CONTACT_EMAIL` | Contact email address |
-| `VITE_BASE_PATH` | Use `/tipde/` for a github.io project URL without a custom domain |
+| `VITE_BASE_PATH` | `/tipde/` for the github.io project URL; `/` once `tipde.online` is active |
 
 Analytics is loaded **only after the visitor accepts non-essential cookies** and never receives tool input.
 
 ## Publishing to GitHub
 
-1. Create a new **public** repository named `tipde` on GitHub (or use `gh repo create tipde --public`).
-2. In this folder, run:
+The public repository is **https://github.com/furqantipde/tipde** and GitHub Pages is enabled with **GitHub Actions** as the build source. The site is live at **https://furqantipde.github.io/tipde/**.
 
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial Tipde release"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/tipde.git
-   git push -u origin main
-   ```
+The workflow in `.github/workflows/deploy.yml` builds and publishes `dist/` automatically on every push to `main`. To reproduce a fresh publication:
 
-3. In the repository settings, open **Pages → Build and deployment** and select **GitHub Actions** as the source.
-4. The workflow in `.github/workflows/deploy.yml` builds and publishes `dist/` automatically on every push to `main`.
-5. Add repository secrets `VITE_GA_MEASUREMENT_ID` and `VITE_GSC_VERIFICATION` if you use GA4 or Search Console.
+```bash
+git init
+git add .
+git commit -m "Initial Tipde release"
+git branch -M main
+git remote add origin https://github.com/<your-username>/tipde.git
+git push -u origin main
+
+# Create the Pages site once (POST creates it; PUT only updates an existing site):
+gh api -X POST repos/<your-username>/tipde/pages -f build_type=workflow
+```
+
+Add repository secrets `VITE_GA_MEASUREMENT_ID` and `VITE_GSC_VERIFICATION` if you use GA4 or Search Console.
 
 ## Cloudflare + custom domain (`tipde.online`)
 
-1. In Cloudflare DNS, add a `CNAME` record named `tipde` pointing to `<your-username>.github.io` (proxy off/"DNS only" is simplest initially). Alternatively use an `A` record to GitHub Pages IPs if you use the apex domain.
+1. In Cloudflare DNS, add a `CNAME` record named `tipde` pointing to `furqantipde.github.io` (proxy off/"DNS only" is simplest initially). Alternatively use `A` records to the GitHub Pages IPs for the apex domain.
 2. In GitHub repository **Settings → Pages → Custom domain**, enter `tipde.online` and save. The included `public/CNAME` file is copied into `dist/` automatically.
-3. Enable **Enforce HTTPS** in GitHub Pages once DNS has propagated.
-4. Submit `https://tipde.online/sitemap.xml` in Google Search Console.
-
-If you deploy to `https://<username>.github.io/tipde/` before the custom domain is active, rebuild with `VITE_BASE_PATH=/tipde/` so asset URLs resolve correctly.
+3. Once DNS is active, create a repository variable named `VITE_BASE_PATH` with value `/` (Repository settings → Secrets and variables → Actions → Variables). The next deployment then uses root-relative assets for `tipde.online`. Until then the workflow defaults to `/tipde/` for the github.io project URL.
+   - Locally: `$env:VITE_BASE_PATH='/' ; npm run build` on PowerShell, or `VITE_BASE_PATH=/ npm run build` on bash.
+4. Enable **Enforce HTTPS** in GitHub Pages once DNS has propagated.
+5. Submit `https://tipde.online/sitemap.xml` in Google Search Console.
 
 ## Advertising readiness
 
