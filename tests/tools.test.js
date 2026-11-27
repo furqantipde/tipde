@@ -1,3 +1,4 @@
+import fs from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { formatHtml, formatJson, minifyCss, minifyJson } from '../src/utils/formatters.js'
 import { base64Decode, base64Encode, urlDecode, urlEncode } from '../src/utils/encoders.js'
@@ -163,6 +164,13 @@ describe('SEO routes', () => {
     expect(tools.length).toBeGreaterThanOrEqual(15)
     const titles = routes.map((route) => getRouteMeta(route).title)
     expect(new Set(titles).size).toBe(titles.length)
+  })
+})
+
+describe('Navigation', () => {
+  it('does not enable global smooth scrolling', () => {
+    const html = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8')
+    expect(html).not.toContain('scroll-smooth')
   })
 })
 
