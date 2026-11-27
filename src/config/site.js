@@ -6,6 +6,7 @@ export const site = {
   url: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SITE_URL) || (typeof process !== 'undefined' ? process.env?.VITE_SITE_URL : undefined) || 'https://tipde.online',
   gaMeasurementId: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GA_MEASUREMENT_ID) || (typeof process !== 'undefined' ? process.env?.VITE_GA_MEASUREMENT_ID : undefined) || '',
   gscVerification: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GSC_VERIFICATION) || (typeof process !== 'undefined' ? process.env?.VITE_GSC_VERIFICATION : undefined) || '',
+  monetagId: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_MONETAG_ID) || (typeof process !== 'undefined' ? process.env?.VITE_MONETAG_ID : undefined) || 'c779a9462a921abf9636fcd4e1e40fad',
   adsEnabled: ((typeof import.meta !== 'undefined' && import.meta.env?.VITE_ENABLE_ADS) || (typeof process !== 'undefined' ? process.env?.VITE_ENABLE_ADS : undefined)) === 'true',
   email: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CONTACT_EMAIL) || (typeof process !== 'undefined' ? process.env?.VITE_CONTACT_EMAIL : undefined) || 'hello@tipde.online',
 }

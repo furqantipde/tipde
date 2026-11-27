@@ -188,4 +188,9 @@ describe('Head scripts', () => {
     expect(head).toContain("analytics_storage: 'denied'")
     expect(head).toContain("gtag('js', new Date())")
   })
+
+  it('adds the monetag verification meta', () => {
+    const head = renderMetaTags(getRouteMeta('/'))
+    expect(head).toContain('<meta name="monetag" content="c779a9462a921abf9636fcd4e1e40fad" />')
+  })
 })

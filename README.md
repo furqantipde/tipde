@@ -82,6 +82,7 @@ Copy `.env.example` to `.env` and adjust as needed:
 | `VITE_SITE_URL` | Canonical base URL (default `https://tipde.online`) |
 | `VITE_GA_MEASUREMENT_ID` | Google tag ID (defaults to `G-ES7PV81P28`) |
 | `VITE_GSC_VERIFICATION` | Search Console verification code |
+| `VITE_MONETAG_ID` | Monetag verification ID (defaults to the live Tipde ID) |
 | `VITE_ENABLE_ADS` | Set `true` only when real ad code is ready |
 | `VITE_CONTACT_EMAIL` | Contact email address |
 | `VITE_BASE_PATH` | `/tipde/` for the github.io project URL; `/` once `tipde.online` is active |

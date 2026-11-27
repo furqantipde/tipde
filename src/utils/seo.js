@@ -164,6 +164,7 @@ export function renderMetaTags(meta) {
   ]
   if (meta.keywords) tags.push(`<meta name="keywords" content="${escapeHtml(meta.keywords)}" />`)
   if (site.gscVerification) tags.push(`<meta name="google-site-verification" content="${escapeHtml(site.gscVerification)}" />`)
+  if (site.monetagId) tags.push(`<meta name="monetag" content="${escapeHtml(site.monetagId)}" />`)
 
   const gaId = site.gaMeasurementId || 'G-ES7PV81P28'
   if (gaId) {
