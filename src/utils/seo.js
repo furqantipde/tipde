@@ -163,6 +163,24 @@ export function renderMetaTags(meta) {
   ]
   if (meta.keywords) tags.push(`<meta name="keywords" content="${escapeHtml(meta.keywords)}" />`)
   if (site.gscVerification) tags.push(`<meta name="google-site-verification" content="${escapeHtml(site.gscVerification)}" />`)
+
+  const gaId = site.gaMeasurementId || 'G-ES7PV81P28'
+  if (gaId) {
+    tags.push(
+      `<script>\n` +
+        `  window.dataLayer = window.dataLayer || [];\n` +
+        `  function gtag(){dataLayer.push(arguments);}\n` +
+        `  gtag('consent', 'default', {\n` +
+        `    analytics_storage: 'denied',\n` +
+        `    ad_storage: 'denied',\n` +
+        `    ad_user_data: 'denied',\n` +
+        `    ad_personalization: 'denied'\n` +
+        `  });\n` +
+        `  gtag('js', new Date());\n` +
+        `</script>`,
+    )
+    tags.push(`<script async src="https://www.googletagmanager.com/gtm.js?id=${escapeHtml(gaId)}"></script>`)
+  }
   if (meta.ld) tags.push(`<script type="application/ld+json">${JSON.stringify(meta.ld).replace(/</g, '\\u003c')}</script>`)
   return tags.join('\n    ')
 }

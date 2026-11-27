@@ -80,13 +80,13 @@ Copy `.env.example` to `.env` and adjust as needed:
 | Variable | Purpose |
 | --- | --- |
 | `VITE_SITE_URL` | Canonical base URL (default `https://tipde.online`) |
-| `VITE_GA_MEASUREMENT_ID` | GA4 measurement ID; empty disables analytics |
+| `VITE_GA_MEASUREMENT_ID` | Google tag ID (defaults to `G-ES7PV81P28`) |
 | `VITE_GSC_VERIFICATION` | Search Console verification code |
 | `VITE_ENABLE_ADS` | Set `true` only when real ad code is ready |
 | `VITE_CONTACT_EMAIL` | Contact email address |
 | `VITE_BASE_PATH` | `/tipde/` for the github.io project URL; `/` once `tipde.online` is active |
 
-Analytics is loaded **only after the visitor accepts non-essential cookies** and never receives tool input.
+The Google tag is present in the head with consent mode set to deny analytics by default; analytics only becomes active after the visitor accepts non-essential cookies. Tool input is never sent to analytics.
 
 ## Publishing to GitHub
 
@@ -106,7 +106,7 @@ git push -u origin main
 gh api -X POST repos/<your-username>/tipde/pages -f build_type=workflow
 ```
 
-Add repository secrets `VITE_GA_MEASUREMENT_ID` and `VITE_GSC_VERIFICATION` if you use GA4 or Search Console.
+Add repository secrets `VITE_GA_MEASUREMENT_ID` (optional override for the default Google tag ID) and `VITE_GSC_VERIFICATION` for Search Console.
 
 ## Cloudflare + custom domain (`tipde.online`)
 

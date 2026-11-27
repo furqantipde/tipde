@@ -4,7 +4,7 @@ import { base64Decode, base64Encode, urlDecode, urlEncode } from '../src/utils/e
 import { generatePassword, generateUuids, uuidv4 } from '../src/utils/generators.js'
 import { countText } from '../src/utils/counters.js'
 import { dateToTimestamp, timestampToDate } from '../src/utils/datetime.js'
-import { getAllRoutes, getRouteMeta } from '../src/utils/seo.js'
+import { getAllRoutes, getRouteMeta, renderMetaTags } from '../src/utils/seo.js'
 import { tools, getTool } from '../src/config/tools.js'
 import { categories } from '../src/config/categories.js'
 import {
@@ -163,5 +163,15 @@ describe('SEO routes', () => {
     expect(tools.length).toBeGreaterThanOrEqual(15)
     const titles = routes.map((route) => getRouteMeta(route).title)
     expect(new Set(titles).size).toBe(titles.length)
+  })
+})
+
+describe('Head scripts', () => {
+  it('adds the Google tag with analytics denied until consent', () => {
+    const head = renderMetaTags(getRouteMeta('/'))
+    expect(head).toContain('https://www.googletagmanager.com/gtm.js?id=G-ES7PV81P28')
+    expect(head).toContain("gtag('consent', 'default'")
+    expect(head).toContain("analytics_storage: 'denied'")
+    expect(head).toContain("gtag('js', new Date())")
   })
 })

@@ -1,4 +1,5 @@
-import { Route, Routes } from 'react-router-dom'
+import { useEffect, useLayoutEffect } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
 import About from './pages/About.jsx'
 import Blog from './pages/Blog.jsx'
@@ -12,9 +13,26 @@ import NotFound from './pages/NotFound.jsx'
 import ToolPage from './pages/ToolPage.jsx'
 import Tools from './pages/Tools.jsx'
 
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
+
+function ScrollToTop() {
+  const { pathname, search } = useLocation()
+
+  useIsomorphicLayoutEffect(() => {
+    const root = document.documentElement
+    const previousBehavior = root.style.scrollBehavior
+    root.style.scrollBehavior = 'auto'
+    window.scrollTo(0, 0)
+    root.style.scrollBehavior = previousBehavior
+  }, [pathname, search])
+
+  return null
+}
+
 export default function App() {
   return (
     <Layout>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/tools" element={<Tools />} />
