@@ -12,7 +12,7 @@ export const site = {
   monetagVignetteZone: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_MONETAG_VIGNETTE_ZONE) || (typeof process !== 'undefined' ? process.env?.VITE_MONETAG_VIGNETTE_ZONE : undefined) || '12373469',
   monetagVignetteScriptSrc: 'https://n6wxm.com/vignette.min.js',
   adsEnabled: ((typeof import.meta !== 'undefined' && import.meta.env?.VITE_ENABLE_ADS) || (typeof process !== 'undefined' ? process.env?.VITE_ENABLE_ADS : undefined)) === 'true',
-  email: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CONTACT_EMAIL) || (typeof process !== 'undefined' ? process.env?.VITE_CONTACT_EMAIL : undefined) || 'dchattha206@gmail.com',
+  email: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CONTACT_EMAIL) || (typeof process !== 'undefined' ? process.env?.VITE_CONTACT_EMAIL : undefined) || 'fchattha206@gmail.com',
 }
 
 export const navigation = [

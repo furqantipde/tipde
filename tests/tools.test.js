@@ -244,7 +244,7 @@ describe('Navigation', () => {
   })
 
   it('uses the requested contact email', () => {
-    expect(site.email).toBe('dchattha206@gmail.com')
+    expect(site.email).toBe('fchattha206@gmail.com')
   })
 })
 
