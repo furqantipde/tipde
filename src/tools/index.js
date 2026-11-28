@@ -1,14 +1,18 @@
 import Base64Tool from './Base64Tool.jsx'
+import ColorConverterTool from './ColorConverterTool.jsx'
 import CssMinifier from './CssMinifier.jsx'
+import HashGeneratorTool from './HashGeneratorTool.jsx'
 import HtmlFormatter from './HtmlFormatter.jsx'
 import JsMinifier from './JsMinifier.jsx'
 import JsonFormatter from './JsonFormatter.jsx'
+import JwtDecoderTool from './JwtDecoderTool.jsx'
 import PasswordGenerator from './PasswordGenerator.jsx'
 import PdfToJpgTool from './PdfToJpgTool.jsx'
 import PdfToWordTool from './PdfToWordTool.jsx'
 import JpgToPdfTool from './JpgToPdfTool.jsx'
 import CompressPdfTool from './CompressPdfTool.jsx'
 import MergePdfTool from './MergePdfTool.jsx'
+import TextCaseTool from './TextCaseTool.jsx'
 import TimestampConverter from './TimestampConverter.jsx'
 import UrlEncoder from './UrlEncoder.jsx'
 import UuidGenerator from './UuidGenerator.jsx'
@@ -30,4 +34,8 @@ export const toolComponents = {
   'compress-pdf': CompressPdfTool,
   'merge-pdf': MergePdfTool,
   'pdf-to-jpg': PdfToJpgTool,
+  'text-case-converter': TextCaseTool,
+  'hex-rgb-converter': ColorConverterTool,
+  'hash-generator': HashGeneratorTool,
+  'jwt-decoder': JwtDecoderTool,
 }

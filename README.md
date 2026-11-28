@@ -2,17 +2,17 @@
 
 **Developer tools. Made simple.**
 
-Tipde is a free, browser-based developer utilities platform. This repository contains the complete React + Vite + Tailwind CSS implementation, including 15 working tools, individually prerendered SEO pages, legal pages, analytics consent handling and GitHub Pages deployment.
+Tipde is a free, browser-based developer utilities platform. This repository contains the complete React + Vite + Tailwind CSS implementation, including 19 working tools, individually prerendered SEO pages, legal pages, analytics consent handling and GitHub Pages deployment.
 
 ## Features
 
-- **15 working tools:** JSON Formatter, HTML Formatter, CSS Minifier, JavaScript Minifier, Base64 Encoder/Decoder, URL Encoder/Decoder, UUID Generator, Password Generator, Word Counter, Unix Timestamp Converter, PDF to Word, JPG to PDF, Compress PDF, Merge PDF and PDF to JPG.
+- **19 working tools:** JSON Formatter, HTML Formatter, CSS Minifier, JavaScript Minifier, Base64 Encoder/Decoder, URL Encoder/Decoder, UUID Generator, Password Generator, Word Counter, Unix Timestamp Converter, PDF to Word, JPG to PDF, Compress PDF, Merge PDF, PDF to JPG, Text Case Converter, HEX to RGB Converter, Hash Generator and JWT Decoder.
 - **Document tools run locally:** PDF parsing, DOCX creation, image conversion, merging and compression rely on client-side libraries loaded only when needed. No file is uploaded.
 - **Private by default:** all tool input is processed locally in the browser. No account, no uploads.
 - **SEO-ready:** a dedicated route, unique metadata, canonical URL, FAQ schema and static HTML for every tool, category and article.
 - **Responsive:** desktop, tablet and mobile layouts.
 - **Light and dark themes:** preference saved in `localStorage`.
-- **Extras:** tool search, category filters, favorites, recently used tools, copy feedback, downloads, keyboard shortcuts, sitemap, robots.txt, cookie consent and optional GA4.
+- **Extras:** tool search, category filters, a dedicated Favorites page, recently used tools, copy feedback, downloads, keyboard shortcuts, sitemap, robots.txt, first-visit cookie consent and optional GA4.
 
 ## Folder structure
 

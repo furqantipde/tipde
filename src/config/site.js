@@ -2,7 +2,7 @@ export const site = {
   name: 'Tipde',
   tagline: 'Developer tools. Made simple.',
   description:
-    'Tipde Tool Hub is a free collection of 15 browser-based developer tools for JSON, HTML, CSS, PDF and image conversion, encoding, generators and more. Private, fast and no sign-up required.',
+    'Tipde Tool Hub is a free collection of 19 browser-based developer tools for JSON, HTML, CSS, PDF and image conversion, encoding, generators and more. Private, fast and no sign-up required.',
   url: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SITE_URL) || (typeof process !== 'undefined' ? process.env?.VITE_SITE_URL : undefined) || 'https://tipde.online',
   gaMeasurementId: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GA_MEASUREMENT_ID) || (typeof process !== 'undefined' ? process.env?.VITE_GA_MEASUREMENT_ID : undefined) || '',
   gscVerification: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GSC_VERIFICATION) || (typeof process !== 'undefined' ? process.env?.VITE_GSC_VERIFICATION : undefined) || '',
@@ -12,12 +12,13 @@ export const site = {
   monetagVignetteZone: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_MONETAG_VIGNETTE_ZONE) || (typeof process !== 'undefined' ? process.env?.VITE_MONETAG_VIGNETTE_ZONE : undefined) || '12373469',
   monetagVignetteScriptSrc: 'https://n6wxm.com/vignette.min.js',
   adsEnabled: ((typeof import.meta !== 'undefined' && import.meta.env?.VITE_ENABLE_ADS) || (typeof process !== 'undefined' ? process.env?.VITE_ENABLE_ADS : undefined)) === 'true',
-  email: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CONTACT_EMAIL) || (typeof process !== 'undefined' ? process.env?.VITE_CONTACT_EMAIL : undefined) || 'hello@tipde.online',
+  email: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CONTACT_EMAIL) || (typeof process !== 'undefined' ? process.env?.VITE_CONTACT_EMAIL : undefined) || 'dchattha206@gmail.com',
 }
 
 export const navigation = [
   { label: 'Home', to: '/' },
   { label: 'All Tools', to: '/tools/' },
+  { label: 'Favorites', to: '/favorites/' },
   { label: 'Categories', to: '/categories/' },
   { label: 'Blog', to: '/blog/' },
   { label: 'About', to: '/about/' },
@@ -29,6 +30,7 @@ export const footerLinks = [
     title: 'Explore',
     links: [
       { label: 'All Tools', to: '/tools/' },
+      { label: 'Favorites', to: '/favorites/' },
       { label: 'Categories', to: '/categories/' },
       { label: 'Blog', to: '/blog/' },
       { label: 'Recently Added', to: '/tools/?sort=newest' },

@@ -5,10 +5,16 @@ import { base64Decode, base64Encode, urlDecode, urlEncode } from '../src/utils/e
 import { generatePassword, generateUuids, uuidv4 } from '../src/utils/generators.js'
 import { countText } from '../src/utils/counters.js'
 import { dateToTimestamp, timestampToDate } from '../src/utils/datetime.js'
+import { convertCase } from '../src/utils/textCase.js'
+import { hashText } from '../src/utils/hash.js'
+import { hexToRgb, rgbToHex } from '../src/utils/colors.js'
+import { decodeJwt } from '../src/utils/jwt.js'
+import { readStoredValue } from '../src/hooks/useLocalStorage.js'
+import { toolComponents } from '../src/tools/index.js'
 import { getAllRoutes, getRouteMeta, renderMetaTags } from '../src/utils/seo.js'
 import { tools, getTool } from '../src/config/tools.js'
 import { categories } from '../src/config/categories.js'
-import { site } from '../src/config/site.js'
+import { footerLinks, navigation, site } from '../src/config/site.js'
 import { legalPages } from '../src/config/legal.js'
 import { buildVignetteScript } from '../src/utils/monetag.js'
 import {
@@ -118,6 +124,41 @@ describe('counters and time', () => {
   })
 })
 
+describe('additional developer utilities', () => {
+  it('converts text between common naming conventions', () => {
+    expect(convertCase('hello world', 'camel')).toBe('helloWorld')
+    expect(convertCase('Hello, Tipde!', 'snake')).toBe('hello_tipde')
+    expect(convertCase('XMLHttpRequest test', 'kebab')).toBe('xml-http-request-test')
+    expect(convertCase('hello world', 'constant')).toBe('HELLO_WORLD')
+    expect(convertCase('hello WORLD', 'title')).toBe('Hello World')
+  })
+
+  it('hashes text with the browser crypto API', async () => {
+    const result = await hashText('abc', 'SHA-256')
+    expect(result.ok).toBe(true)
+    expect(result.value).toBe('ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad')
+    expect((await hashText('abc', 'MD5')).ok).toBe(false)
+  })
+
+  it('converts between hex and RGB colors', () => {
+    expect(hexToRgb('#fff').value).toBe('rgb(255, 255, 255)')
+    expect(hexToRgb('1e40af').hex).toBe('#1e40af')
+    expect(rgbToHex('rgb(30, 64, 175)').value).toBe('#1e40af')
+    expect(rgbToHex('rgb(300, 0, 0)').ok).toBe(false)
+    expect(hexToRgb('nope').ok).toBe(false)
+  })
+
+  it('decodes a JWT header and payload without verifying the signature', () => {
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlRpcGRlIn0.signature'
+    const result = decodeJwt(token)
+    expect(result.ok).toBe(true)
+    expect(result.header.alg).toBe('HS256')
+    expect(result.payload.name).toBe('Tipde')
+    expect(result.signature).toBe('signature')
+    expect(decodeJwt('not-a-jwt').ok).toBe(false)
+  })
+})
+
 describe('document tools', () => {
   it('formats file sizes safely', () => {
     expect(formatBytes(1536)).toBe('1.5 KB')
@@ -164,15 +205,30 @@ describe('SEO routes', () => {
   it('uses the Tipde Tool Hub Free title and description on the homepage', () => {
     const home = getRouteMeta('/')
     expect(home.title).toBe('Tipde Tool Hub Free | Developer Tools')
-    expect(home.description).toContain('Tipde Tool Hub is a free collection of 15 browser-based developer tools')
+    expect(home.description).toContain('Tipde Tool Hub is a free collection of 19 browser-based developer tools')
   })
 
   it('provides unique metadata for every route', () => {
     const routes = getAllRoutes()
-    expect(routes.length).toBeGreaterThanOrEqual(38)
-    expect(tools.length).toBeGreaterThanOrEqual(15)
+    expect(routes.length).toBeGreaterThanOrEqual(46)
+    expect(tools.length).toBeGreaterThanOrEqual(19)
     const titles = routes.map((route) => getRouteMeta(route).title)
     expect(new Set(titles).size).toBe(titles.length)
+  })
+
+  it('adds the favorites page to routes and metadata', () => {
+    expect(getAllRoutes()).toContain('/favorites/')
+    expect(getRouteMeta('/favorites/').title).toBe('Your Favorites | Tipde')
+  })
+
+  it('registers every new utility with a working component', () => {
+    const slugs = ['text-case-converter', 'hex-rgb-converter', 'hash-generator', 'jwt-decoder']
+    slugs.forEach((slug) => {
+      const tool = getTool(slug)
+      expect(tool).toBeDefined()
+      expect(toolComponents[slug]).toBeDefined()
+      expect(getRouteMeta(`/tools/${slug}/`).title).toBe(`${tool.name} | Tipde`)
+    })
   })
 })
 
@@ -180,6 +236,32 @@ describe('Navigation', () => {
   it('does not enable global smooth scrolling', () => {
     const html = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8')
     expect(html).not.toContain('scroll-smooth')
+  })
+
+  it('links to favorites in the header and footer', () => {
+    expect(navigation.some((item) => item.to === '/favorites/')).toBe(true)
+    expect(footerLinks.some((group) => group.links.some((link) => link.to === '/favorites/'))).toBe(true)
+  })
+
+  it('uses the requested contact email', () => {
+    expect(site.email).toBe('dchattha206@gmail.com')
+  })
+})
+
+describe('preferences persistence', () => {
+  it('reads stored consent on the first render so the banner does not reappear', () => {
+    const previous = globalThis.window
+    globalThis.window = {
+      localStorage: {
+        getItem: (key) => (key === 'tipde:consent' ? '"all"' : null),
+      },
+    }
+    try {
+      expect(readStoredValue('tipde:consent', null)).toBe('all')
+    } finally {
+      if (previous === undefined) delete globalThis.window
+      else globalThis.window = previous
+    }
   })
 })
 

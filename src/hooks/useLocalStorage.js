@@ -1,15 +1,31 @@
 import { useCallback, useEffect, useState } from 'react'
 
+export function readStoredValue(key, initialValue) {
+  if (typeof window === 'undefined') return initialValue
+  try {
+    const stored = window.localStorage.getItem(key)
+    return stored === null ? initialValue : JSON.parse(stored)
+  } catch {
+    // Ignore unavailable or malformed storage.
+    return initialValue
+  }
+}
+
 export function useLocalStorage(key, initialValue) {
-  const [value, setValue] = useState(initialValue)
+  const [value, setValue] = useState(() => readStoredValue(key, initialValue))
 
   useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(key)
-      if (stored !== null) setValue(JSON.parse(stored))
-    } catch {
-      // Ignore unavailable or malformed storage.
+    const sync = (event) => {
+      if (event.key !== key) return
+      try {
+        setValue(event.newValue === null ? initialValue : JSON.parse(event.newValue))
+      } catch {
+        setValue(initialValue)
+      }
     }
+
+    window.addEventListener('storage', sync)
+    return () => window.removeEventListener('storage', sync)
   }, [key])
 
   const update = useCallback(

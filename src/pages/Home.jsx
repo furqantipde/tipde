@@ -120,7 +120,12 @@ export default function Home() {
             <div>
               <SectionHeading eyebrow="Your workspace" title="Favorites & recently used" description="Saved privately in your browser for quick access." />
               <Card className="p-5">
-                <h3 className="mb-3 text-sm font-semibold">Favorites</h3>
+                <div className="mb-3 flex items-center justify-between gap-3">
+                  <h3 className="text-sm font-semibold">Favorites</h3>
+                  <Link to="/favorites/" className="inline-flex items-center gap-1 text-xs font-semibold text-brand-600 hover:gap-2 dark:text-brand-200">
+                    View all <ArrowIcon width={14} height={14} />
+                  </Link>
+                </div>
                 {favoriteTools.length ? (
                   <div className="mb-6 flex flex-wrap gap-2">
                     {favoriteTools.map((tool) => <Link key={tool.slug} to={`/tools/${tool.slug}/`} className="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">{tool.name}</Link>)}

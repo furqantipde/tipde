@@ -7,7 +7,10 @@ export default function CookieConsent() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    if (consent === null) setVisible(true)
+    // A stored choice is available on the first render now, so the banner is
+    // shown only when there is genuinely no saved consent.
+    setVisible(consent === null)
+
     const reopen = () => setVisible(true)
     window.addEventListener('tipde:open-consent', reopen)
     return () => window.removeEventListener('tipde:open-consent', reopen)

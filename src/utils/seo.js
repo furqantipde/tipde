@@ -29,6 +29,10 @@ const staticPages = {
     title: 'Contact Tipde',
     description: 'Get in touch with the Tipde team about feedback, ideas or partnerships.',
   },
+  '/favorites/': {
+    title: 'Your Favorites | Tipde',
+    description: 'View the Tipde tools you saved with the star button. Favorites stay privately in your browser and never leave your device.',
+  },
   'privacy-policy': legalPages['privacy-policy'],
   terms: legalPages.terms,
   'cookie-policy': legalPages['cookie-policy'],
@@ -127,6 +131,7 @@ export function getAllRoutes() {
     '/blog/',
     '/about/',
     '/contact/',
+    '/favorites/',
     '/privacy-policy/',
     '/terms/',
     '/cookie-policy/',

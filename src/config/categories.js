@@ -53,6 +53,24 @@ export const categories = [
     description: 'Convert, combine and compress PDFs and images directly in your browser.',
     icon: 'PDF',
   },
+  {
+    slug: 'text-tools',
+    name: 'Text Tools',
+    description: 'Transform text between common naming conventions and letter cases.',
+    icon: 'Aa',
+  },
+  {
+    slug: 'color-tools',
+    name: 'Color Tools',
+    description: 'Convert colors between hex and RGB values with a live preview.',
+    icon: '◉',
+  },
+  {
+    slug: 'security-tools',
+    name: 'Security Tools',
+    description: 'Inspect tokens and generate hashes without sending data to a server.',
+    icon: '🔐',
+  },
 ]
 
 export function getCategory(slug) {

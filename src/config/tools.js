@@ -499,6 +499,138 @@ export const tools = [
     featured: false,
     added: '2026-12-04',
   },
+  {
+    slug: 'text-case-converter',
+    name: 'Text Case Converter',
+    category: 'text-tools',
+    icon: 'Aa',
+    short: 'Convert text between camelCase, snake_case, kebab-case and more.',
+    description:
+      'Turn messy labels and variable names into the convention your project needs. Choose camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case or simple upper and lower case. Conversion is live and happens entirely in your browser.',
+    keywords: ['text case converter', 'camel case converter', 'snake case converter', 'kebab case converter', 'uppercase lowercase converter'],
+    example: 'hello world from tipde',
+    instructions: [
+      'Type or paste text into the input box.',
+      'Choose the naming convention you need.',
+      'Copy or download the converted result.',
+    ],
+    faqs: [
+      {
+        q: 'How are words detected?',
+        a: 'The tool splits on spaces, punctuation and camelCase boundaries, so "XMLHttpRequest" becomes separate words before conversion.',
+      },
+      {
+        q: 'Does it preserve punctuation?',
+        a: 'Naming conventions use letters and numbers only. Title, upper and lower case keep the original text and change only letter casing.',
+      },
+      {
+        q: 'Is my text uploaded?',
+        a: 'No. Everything runs locally in your browser with plain JavaScript.',
+      },
+    ],
+    related: ['word-counter', 'base64-encoder-decoder', 'json-formatter'],
+    featured: true,
+    added: '2026-12-05',
+  },
+  {
+    slug: 'hex-rgb-converter',
+    name: 'HEX to RGB Converter',
+    category: 'color-tools',
+    icon: '◉',
+    short: 'Convert hex colors to RGB and RGB colors to hex instantly.',
+    description:
+      'Translate colors between #RRGGBB and rgb(r, g, b) notation with a live swatch preview. Shorthand hex values such as #fff are accepted, and invalid input is reported clearly. All conversion happens locally in your browser.',
+    keywords: ['hex to rgb', 'rgb to hex', 'color converter', 'hex color converter', 'rgb color picker'],
+    example: '#1e40af',
+    instructions: [
+      'Choose whether you are converting from HEX or RGB.',
+      'Enter a color value or load the example.',
+      'Copy the converted value from the result panel.',
+    ],
+    faqs: [
+      {
+        q: 'Which hex formats work?',
+        a: 'Three-digit shorthand like #fff and six-digit values like #1e40af both work. The leading # is optional.',
+      },
+      {
+        q: 'Does it support rgba and opacity?',
+        a: 'The output is always six-digit hex, so alpha channels are not preserved. Use rgb() input without opacity for best results.',
+      },
+      {
+        q: 'Is the color sent anywhere?',
+        a: 'No. The conversion and preview run entirely in your browser.',
+      },
+    ],
+    related: ['text-case-converter', 'css-minifier', 'json-formatter'],
+    featured: false,
+    added: '2026-12-06',
+  },
+  {
+    slug: 'hash-generator',
+    name: 'Hash Generator',
+    category: 'security-tools',
+    icon: '🔐',
+    short: 'Generate SHA-1, SHA-256, SHA-384 and SHA-512 hashes locally.',
+    description:
+      'Create cryptographic hashes from any text using the browser Web Crypto API. Pick SHA-1 for legacy compatibility or SHA-256 and stronger for modern applications. Nothing is uploaded, and the digest is ready to copy as soon as it is generated.',
+    keywords: ['hash generator', 'sha256 generator', 'sha1 hash', 'text hash online', 'crypto hash calculator'],
+    example: 'Hello, Tipde!',
+    instructions: [
+      'Enter the text you want to hash.',
+      'Choose an algorithm from the dropdown.',
+      'Press Generate hash, then copy or download the digest.',
+    ],
+    faqs: [
+      {
+        q: 'Which algorithms are supported?',
+        a: 'SHA-1, SHA-256, SHA-384 and SHA-512 are provided by the browser Web Crypto API.',
+      },
+      {
+        q: 'Is hashing the same as encryption?',
+        a: 'No. Hashing is one-way and cannot be reversed to recover the original text. It is used for integrity checks and password storage workflows.',
+      },
+      {
+        q: 'Does the text leave my device?',
+        a: 'No. The digest is calculated locally with standard browser cryptography.',
+      },
+    ],
+    related: ['jwt-decoder', 'password-generator', 'base64-encoder-decoder'],
+    featured: true,
+    added: '2026-12-07',
+  },
+  {
+    slug: 'jwt-decoder',
+    name: 'JWT Decoder',
+    category: 'security-tools',
+    icon: '{}',
+    short: 'Inspect JWT headers and payloads without sending tokens anywhere.',
+    description:
+      'Paste a JSON Web Token to read its header and payload as formatted JSON. The decoder handles base64url and UTF-8 correctly and clearly states that the signature is not verified. It is a useful local debugging aid for developers working with authentication flows.',
+    keywords: ['jwt decoder', 'decode jwt token', 'jwt inspector', 'json web token decoder', 'jwt payload viewer'],
+    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlRpcGRlIn0.signature',
+    instructions: [
+      'Paste a JWT into the input area or load the example.',
+      'Read the decoded header and payload as formatted JSON.',
+      'Use the signature panel only for reference; it is not verified.',
+    ],
+    faqs: [
+      {
+        q: 'Does this verify the JWT signature?',
+        a: 'No. It only decodes the header and payload. Signature verification must happen in your application with the correct secret or public key.',
+      },
+      {
+        q: 'Is my token stored or uploaded?',
+        a: 'No. Decoding happens in your browser memory and the token is never sent to a server.',
+      },
+      {
+        q: 'Why do I see an error?',
+        a: 'A JWT needs three non-empty, dot-separated parts with valid base64url JSON in the first two parts.',
+      },
+    ],
+    related: ['hash-generator', 'base64-encoder-decoder', 'json-formatter'],
+    featured: true,
+    added: '2026-12-08',
+  },
 ]
 
 export const featuredTools = tools.filter((tool) => tool.featured)
