@@ -161,10 +161,10 @@ describe('document tools', () => {
 })
 
 describe('SEO routes', () => {
-  it('uses the tools hub title and description on the homepage', () => {
+  it('uses the Tipde Tool Hub Free title and description on the homepage', () => {
     const home = getRouteMeta('/')
-    expect(home.title).toBe('Tools Hub by Tipde')
-    expect(home.description).toContain('15 free browser-based developer tools')
+    expect(home.title).toBe('Tipde Tool Hub Free | Developer Tools')
+    expect(home.description).toContain('Tipde Tool Hub is a free collection of 15 browser-based developer tools')
   })
 
   it('provides unique metadata for every route', () => {
