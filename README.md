@@ -84,6 +84,7 @@ Copy `.env.example` to `.env` and adjust as needed:
 | `VITE_GSC_VERIFICATION` | Search Console verification code |
 | `VITE_MONETAG_ID` | Monetag verification ID (defaults to the live Tipde ID) |
 | `VITE_MONETAG_ZONE` | Monetag ad zone (defaults to `316799`) |
+| `VITE_MONETAG_VIGNETTE_ZONE` | Monetag vignette zone (defaults to `12373469`) |
 | `VITE_ENABLE_ADS` | Enables optional empty ad placeholders only |
 | `VITE_CONTACT_EMAIL` | Contact email address |
 | `VITE_BASE_PATH` | `/tipde/` for the github.io project URL; `/` once `tipde.online` is active |
@@ -108,7 +109,7 @@ git push -u origin main
 gh api -X POST repos/<your-username>/tipde/pages -f build_type=workflow
 ```
 
-Add repository secrets `VITE_GA_MEASUREMENT_ID` (optional override for the default Google tag ID) and `VITE_GSC_VERIFICATION` for Search Console. `VITE_MONETAG_ID` and `VITE_MONETAG_ZONE` can be set as repository variables to override the built-in defaults.
+Add repository secrets `VITE_GA_MEASUREMENT_ID` (optional override for the default Google tag ID) and `VITE_GSC_VERIFICATION` for Search Console. `VITE_MONETAG_ID`, `VITE_MONETAG_ZONE` and `VITE_MONETAG_VIGNETTE_ZONE` can be set as repository variables to override the built-in defaults.
 
 ## Cloudflare + custom domain (`tipde.online`)
 
@@ -121,7 +122,7 @@ Add repository secrets `VITE_GA_MEASUREMENT_ID` (optional override for the defau
 
 ## Advertising
 
-Tipde uses Monetag for ads. The configured script is appended to the head only after a visitor chooses **Accept all**; **Essential only** prevents it from loading. Optional empty ad placeholders remain disabled unless `VITE_ENABLE_ADS=true`, so no fake ads are shown.
+Tipde uses Monetag for ads, including vignette ads. The configured scripts are appended to the head only after a visitor chooses **Accept all**; **Essential only** prevents them from loading. Optional empty ad placeholders remain disabled unless `VITE_ENABLE_ADS=true`, so no fake ads are shown.
 
 Keep ads out of tool controls and keep the consent banner active for regions that require it. No AdSense approval is claimed in this repository.
 

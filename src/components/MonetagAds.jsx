@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { site } from '../config/site.js'
+import { buildVignetteScript } from '../utils/monetag.js'
 
 const CONSENT_KEY = 'tipde:consent'
 
@@ -30,8 +31,28 @@ function loadMonetag() {
   document.head.appendChild(script)
 }
 
+function loadMonetagVignette() {
+  if (!site.monetagVignetteZone || !site.monetagVignetteScriptSrc) return
+  if (window.__tipdeMonetagVignetteLoaded || document.querySelector('script[data-tipde-monetag-vignette]')) return
+
+  window.__tipdeMonetagVignetteLoaded = true
+
+  const script = document.createElement('script')
+  script.textContent = buildVignetteScript()
+  script.setAttribute('data-tipde-monetag-vignette', '')
+
+  try {
+    document.head.appendChild(script)
+  } catch {
+    window.__tipdeMonetagVignetteLoaded = false
+    script.remove()
+  }
+}
+
 function syncConsent(value) {
-  if (value === 'all') loadMonetag()
+  if (value !== 'all') return
+  loadMonetag()
+  loadMonetagVignette()
 }
 
 export default function MonetagAds() {

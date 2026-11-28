@@ -9,6 +9,8 @@ export const site = {
   monetagId: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_MONETAG_ID) || (typeof process !== 'undefined' ? process.env?.VITE_MONETAG_ID : undefined) || 'c779a9462a921abf9636fcd4e1e40fad',
   monetagZone: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_MONETAG_ZONE) || (typeof process !== 'undefined' ? process.env?.VITE_MONETAG_ZONE : undefined) || '316799',
   monetagScriptSrc: 'https://quge5.com/88/tag.min.js',
+  monetagVignetteZone: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_MONETAG_VIGNETTE_ZONE) || (typeof process !== 'undefined' ? process.env?.VITE_MONETAG_VIGNETTE_ZONE : undefined) || '12373469',
+  monetagVignetteScriptSrc: 'https://n6wxm.com/vignette.min.js',
   adsEnabled: ((typeof import.meta !== 'undefined' && import.meta.env?.VITE_ENABLE_ADS) || (typeof process !== 'undefined' ? process.env?.VITE_ENABLE_ADS : undefined)) === 'true',
   email: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CONTACT_EMAIL) || (typeof process !== 'undefined' ? process.env?.VITE_CONTACT_EMAIL : undefined) || 'hello@tipde.online',
 }

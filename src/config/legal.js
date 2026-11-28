@@ -12,7 +12,7 @@ export const legalPages = {
       { type: 'h2', text: 'Analytics' },
       { type: 'p', text: 'If analytics is enabled, Tipde may use Google Analytics 4 to understand aggregate traffic such as page views and approximate region. Analytics is loaded only after you accept non-essential cookies where consent is required. Tool input is never included in analytics events.' },
       { type: 'h2', text: 'Advertising' },
-      { type: 'p', text: 'Tipde displays ads through Monetag. The Monetag script is loaded only after you accept non-essential cookies. The ad provider may use cookies or similar technologies to select and measure ads. Tool input is never sent to Monetag.' },
+      { type: 'p', text: 'Tipde displays ads through Monetag, including banner and occasional vignette ads. The Monetag scripts are loaded only after you accept non-essential cookies. The ad provider may use cookies or similar technologies to select and measure ads. Tool input is never sent to Monetag.' },
       { type: 'h2', text: 'Third-party services' },
       { type: 'p', text: 'Fonts are loaded from Google Fonts. These requests may reveal your IP address to that provider. Search Console and analytics, when configured, are used only for site measurement.' },
       { type: 'h2', text: 'Children' },

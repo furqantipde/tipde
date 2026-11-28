@@ -10,6 +10,7 @@ import { tools, getTool } from '../src/config/tools.js'
 import { categories } from '../src/config/categories.js'
 import { site } from '../src/config/site.js'
 import { legalPages } from '../src/config/legal.js'
+import { buildVignetteScript } from '../src/utils/monetag.js'
 import {
   formatBytes,
   isImageFile,
@@ -198,15 +199,23 @@ describe('Head scripts', () => {
 })
 
 describe('Advertising', () => {
-  it('configures the Monetag zone and script', () => {
+  it('configures the Monetag zones and scripts', () => {
     expect(site.monetagZone).toBe('316799')
     expect(site.monetagScriptSrc).toBe('https://quge5.com/88/tag.min.js')
+    expect(site.monetagVignetteZone).toBe('12373469')
+    expect(site.monetagVignetteScriptSrc).toBe('https://n6wxm.com/vignette.min.js')
+  })
+
+  it('builds the exact Monetag vignette script', () => {
+    expect(buildVignetteScript()).toBe(
+      "(function(s){s.dataset.zone='12373469',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))",
+    )
   })
 
   it('documents consent-gated advertising in the legal pages', () => {
     const privacy = legalPages['privacy-policy'].body.map((block) => block.text).join(' ')
     const cookies = legalPages['cookie-policy'].body.map((block) => block.text).join(' ')
-    expect(privacy).toContain('Monetag script is loaded only after you accept non-essential cookies')
+    expect(privacy).toContain('Monetag scripts are loaded only after you accept non-essential cookies')
     expect(cookies).toContain('Choosing Essential only prevents the Monetag script from loading')
   })
 })
