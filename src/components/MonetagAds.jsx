@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { site } from '../config/site.js'
+import { monetagVignetteZones, site } from '../config/site.js'
 import { buildVignetteScript } from '../utils/monetag.js'
 
 const CONSENT_KEY = 'tipde:consent'
@@ -31,28 +31,31 @@ function loadMonetag() {
   document.head.appendChild(script)
 }
 
-function loadMonetagVignette() {
-  if (!site.monetagVignetteZone || !site.monetagVignetteScriptSrc) return
-  if (window.__tipdeMonetagVignetteLoaded || document.querySelector('script[data-tipde-monetag-vignette]')) return
+function loadMonetagVignettes() {
+  if (!site.monetagVignetteScriptSrc) return
 
-  window.__tipdeMonetagVignetteLoaded = true
+  const existing = [...document.querySelectorAll('script[data-tipde-monetag-vignette]')]
+    .map((script) => script.dataset.tipdeMonetagVignette)
 
-  const script = document.createElement('script')
-  script.textContent = buildVignetteScript()
-  script.setAttribute('data-tipde-monetag-vignette', '')
+  monetagVignetteZones.forEach((zone) => {
+    if (existing.includes(zone)) return
 
-  try {
-    document.head.appendChild(script)
-  } catch {
-    window.__tipdeMonetagVignetteLoaded = false
-    script.remove()
-  }
+    const script = document.createElement('script')
+    script.textContent = buildVignetteScript(zone)
+    script.setAttribute('data-tipde-monetag-vignette', zone)
+
+    try {
+      document.head.appendChild(script)
+    } catch {
+      script.remove()
+    }
+  })
 }
 
 function syncConsent(value) {
   if (value !== 'all') return
   loadMonetag()
-  loadMonetagVignette()
+  loadMonetagVignettes()
 }
 
 export default function MonetagAds() {

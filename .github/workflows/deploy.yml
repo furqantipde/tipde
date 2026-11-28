@@ -39,6 +39,7 @@ jobs:
           VITE_MONETAG_ID: ${{ vars.VITE_MONETAG_ID || 'c779a9462a921abf9636fcd4e1e40fad' }}
           VITE_MONETAG_ZONE: ${{ vars.VITE_MONETAG_ZONE || '316799' }}
           VITE_MONETAG_VIGNETTE_ZONE: ${{ vars.VITE_MONETAG_VIGNETTE_ZONE || '12373469' }}
+          VITE_MONETAG_VIGNETTE_ZONE_2: ${{ vars.VITE_MONETAG_VIGNETTE_ZONE_2 || '12374408' }}
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

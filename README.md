@@ -84,7 +84,8 @@ Copy `.env.example` to `.env` and adjust as needed:
 | `VITE_GSC_VERIFICATION` | Search Console verification code |
 | `VITE_MONETAG_ID` | Monetag verification ID (defaults to the live Tipde ID) |
 | `VITE_MONETAG_ZONE` | Monetag ad zone (defaults to `316799`) |
-| `VITE_MONETAG_VIGNETTE_ZONE` | Monetag vignette zone (defaults to `12373469`) |
+| `VITE_MONETAG_VIGNETTE_ZONE` | First Monetag vignette zone (defaults to `12373469`) |
+| `VITE_MONETAG_VIGNETTE_ZONE_2` | Second Monetag vignette zone (defaults to `12374408`) |
 | `VITE_ENABLE_ADS` | Enables optional empty ad placeholders only |
 | `VITE_CONTACT_EMAIL` | Contact email address |
 | `VITE_BASE_PATH` | `/tipde/` for the github.io project URL; `/` once `tipde.online` is active |
@@ -109,7 +110,7 @@ git push -u origin main
 gh api -X POST repos/<your-username>/tipde/pages -f build_type=workflow
 ```
 
-Add repository secrets `VITE_GA_MEASUREMENT_ID` (optional override for the default Google tag ID) and `VITE_GSC_VERIFICATION` for Search Console. `VITE_MONETAG_ID`, `VITE_MONETAG_ZONE` and `VITE_MONETAG_VIGNETTE_ZONE` can be set as repository variables to override the built-in defaults.
+Add repository secrets `VITE_GA_MEASUREMENT_ID` (optional override for the default Google tag ID) and `VITE_GSC_VERIFICATION` for Search Console. `VITE_MONETAG_ID`, `VITE_MONETAG_ZONE`, `VITE_MONETAG_VIGNETTE_ZONE` and `VITE_MONETAG_VIGNETTE_ZONE_2` can be set as repository variables to override the built-in defaults.
 
 ## Cloudflare + custom domain (`tipde.online`)
 

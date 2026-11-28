@@ -14,7 +14,7 @@ import { toolComponents } from '../src/tools/index.js'
 import { getAllRoutes, getRouteMeta, renderMetaTags } from '../src/utils/seo.js'
 import { tools, getTool } from '../src/config/tools.js'
 import { categories } from '../src/config/categories.js'
-import { footerLinks, navigation, site } from '../src/config/site.js'
+import { footerLinks, monetagVignetteZones, navigation, site } from '../src/config/site.js'
 import { legalPages } from '../src/config/legal.js'
 import { buildVignetteScript } from '../src/utils/monetag.js'
 import {
@@ -285,12 +285,17 @@ describe('Advertising', () => {
     expect(site.monetagZone).toBe('316799')
     expect(site.monetagScriptSrc).toBe('https://quge5.com/88/tag.min.js')
     expect(site.monetagVignetteZone).toBe('12373469')
+    expect(site.monetagVignetteZone2).toBe('12374408')
+    expect(monetagVignetteZones).toEqual(['12373469', '12374408'])
     expect(site.monetagVignetteScriptSrc).toBe('https://n6wxm.com/vignette.min.js')
   })
 
-  it('builds the exact Monetag vignette script', () => {
+  it('builds both exact Monetag vignette scripts', () => {
     expect(buildVignetteScript()).toBe(
       "(function(s){s.dataset.zone='12373469',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))",
+    )
+    expect(buildVignetteScript('12374408')).toBe(
+      "(function(s){s.dataset.zone='12374408',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))",
     )
   })
 

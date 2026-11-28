@@ -4,9 +4,9 @@ function singleQuoted(value) {
   return `'${String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`
 }
 
-export function buildVignetteScript() {
+export function buildVignetteScript(zone = site.monetagVignetteZone) {
   return (
-    `(function(s){s.dataset.zone=${singleQuoted(site.monetagVignetteZone)},s.src=${singleQuoted(site.monetagVignetteScriptSrc)}})` +
+    `(function(s){s.dataset.zone=${singleQuoted(zone)},s.src=${singleQuoted(site.monetagVignetteScriptSrc)}})` +
     `([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
   )
 }
